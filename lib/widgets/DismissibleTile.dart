@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../ItemList.dart';
+import 'NotificationList.dart';
 
 class DismissibleTile extends StatelessWidget {
   final item;
@@ -26,7 +27,11 @@ class DismissibleTile extends StatelessWidget {
             content: Text("Removed ${item.toString()}"),
             duration: Duration(seconds: 2),
           ));
-        } else if (dir == DismissDirection.startToEnd) {}
+        } else if (dir == DismissDirection.startToEnd) {
+          myItems.setEditingItem(item);
+          NotificationList.showEditNotificationDialog(context);
+          myItems.removeItem(item);
+        }
       },
       secondaryBackground: Container(
         color: Colors.red,

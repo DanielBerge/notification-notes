@@ -4,6 +4,7 @@ import 'package:notification_notes/handlers/StorageHandler.dart';
 class ItemList with ChangeNotifier {
   StorageHandler _storageHandler = new StorageHandler();
   List<String> myItems = List();
+  Tuple editing = null;
 
   ItemList() {
     _storageHandler.getList().then((list) {
@@ -15,10 +16,20 @@ class ItemList with ChangeNotifier {
   void updateList(int oldIndex, int newIndex) {
     var old = myItems[oldIndex];
     myItems.removeAt(oldIndex);
-    if(newIndex == myItems.length+1) {
+    if (newIndex == myItems.length + 1) {
       myItems.add(old);
     } else {
       myItems.insert(newIndex, old);
+    }
+    _storageHandler.setList(myItems);
+    notifyListeners();
+  }
+
+  void insertItem(index, item) {
+    if (index == myItems.length + 1) {
+      myItems.add(item);
+    } else {
+      myItems.insert(index, item);
     }
     _storageHandler.setList(myItems);
     notifyListeners();
@@ -35,4 +46,16 @@ class ItemList with ChangeNotifier {
     _storageHandler.setList(myItems);
     notifyListeners();
   }
+
+  void setEditingItem(item) {
+    editing = Tuple(index: myItems.indexOf(item), string: item);
+    notifyListeners();
+  }
+}
+
+class Tuple {
+  var string;
+  var index;
+
+  Tuple({this.index, this.string});
 }

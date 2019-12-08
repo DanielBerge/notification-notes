@@ -4,10 +4,21 @@ import 'package:notification_notes/ItemList.dart';
 import 'package:provider/provider.dart';
 
 import '../handlers/NotificationHandler.dart';
+import 'EditNotificationDialog.dart';
 
 class NotificationList extends StatelessWidget {
   NotificationList({Key key, this.title}) : super(key: key);
   final String title;
+
+  static Future showEditNotificationDialog(BuildContext context) {
+    final myItems = Provider.of<ItemList>(context, listen: true);
+
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) =>
+          Dialog(child: EditNotificationDialog(itemList: myItems)),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +27,12 @@ class NotificationList extends StatelessWidget {
     NotificationHandler handler = new NotificationHandler();
     handler.showNotifications(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Consumer<ItemList>(
-        builder: (_, items, __) => ReorderableListView(
+    return Consumer<ItemList>(
+      builder: (_, items, __) => Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: ReorderableListView(
           children: <Widget>[
             for (final item in items.myItems)
               DismissibleTile(
@@ -33,13 +44,13 @@ class NotificationList extends StatelessWidget {
             myItems.updateList(oldIndex, newIndex);
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          myItems.addItem(myItems.myItems.length.toString() + "dasd");
-        },
-        tooltip: 'Add',
-        child: Icon(Icons.add),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showEditNotificationDialog(context);
+          },
+          tooltip: 'Add',
+          child: Icon(Icons.add),
+        ),
       ),
     );
   }
