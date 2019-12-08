@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_notes/ItemList.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +21,11 @@ class NotificationHandler {
     var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         playSound: false,
+        autoCancel: false,
+        onlyAlertOnce: true,
+        ongoing: true,
+        enableVibration: false,
+        channelShowBadge: false,
         importance: Importance.Default,
         priority: Priority.Low);
     var iOSPlatformChannelSpecifics =
