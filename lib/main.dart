@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notification_notes/NotificationList.dart';
+import 'package:notification_notes/widgets/NotificationList.dart';
 import 'package:provider/provider.dart';
 
 import 'ItemList.dart';

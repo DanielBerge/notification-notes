@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:notification_notes/DismissibleTile.dart';
+import 'package:notification_notes/widgets/DismissibleTile.dart';
 import 'package:notification_notes/ItemList.dart';
 import 'package:provider/provider.dart';
 
-import 'NotificationHandler.dart';
+import '../handlers/NotificationHandler.dart';
 
 class NotificationList extends StatelessWidget {
   NotificationList({Key key, this.title}) : super(key: key);
