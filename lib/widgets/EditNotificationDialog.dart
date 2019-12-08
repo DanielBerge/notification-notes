@@ -2,22 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/ItemList.dart';
 
-class EditNotificationDialog extends StatefulWidget {
+class EditNotificationDialog extends StatelessWidget {
   final ItemList itemList;
+
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   EditNotificationDialog({@required this.itemList});
 
   @override
-  State<StatefulWidget> createState() => EditNotificationState();
-}
-
-class EditNotificationState extends State<EditNotificationDialog> {
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
-    titleController.text = widget.itemList.editing == null ? "" : widget.itemList.editing.string;
+    titleController.text = itemList.editing == null ? "" : itemList.editing.string;
     return SizedBox(
       width: 200,
       height: 300,
@@ -39,11 +34,12 @@ class EditNotificationState extends State<EditNotificationDialog> {
               child: Text("Save"),
               color: Colors.teal,
               onPressed: () {
-                if(widget.itemList.editing == null) {
-                  widget.itemList.addItem(titleController.text);
+                if(itemList.editing == null) {
+                  itemList.addItem(titleController.text);
                   Navigator.of(context).pop();
                 } else {
-                  widget.itemList.insertItem(widget.itemList.editing.index, titleController.text);
+                  itemList.insertItem(itemList.editing.index, titleController.text);
+                  itemList.clearEditingItem();
                   Navigator.of(context).pop();
                 }
               },

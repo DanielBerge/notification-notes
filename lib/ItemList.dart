@@ -51,6 +51,10 @@ class ItemList with ChangeNotifier {
     editing = Tuple(index: myItems.indexOf(item), string: item);
     notifyListeners();
   }
+
+  void clearEditingItem() {
+    editing = null;
+  }
 }
 
 class Tuple {

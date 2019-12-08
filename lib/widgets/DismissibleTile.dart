@@ -21,11 +21,18 @@ class DismissibleTile extends StatelessWidget {
       ),
       onDismissed: (dir) {
         if (dir == DismissDirection.endToStart) {
+          int undoIndex = myItems.myItems.indexOf(item);
           myItems.removeItem(item);
           Scaffold.of(context).removeCurrentSnackBar();
           Scaffold.of(context).showSnackBar(SnackBar(
             content: Text("Removed ${item.toString()}"),
-            duration: Duration(seconds: 2),
+            action: SnackBarAction(
+              label: "Undo",
+              onPressed: () {
+                myItems.insertItem(undoIndex, item);
+              },
+            ),
+            duration: Duration(seconds: 3),
           ));
         } else if (dir == DismissDirection.startToEnd) {
           myItems.setEditingItem(item);
