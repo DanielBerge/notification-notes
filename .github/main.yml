@@ -1,5 +1,5 @@
 on: push
-name: Test
+name: Test, Build and Release apk
 jobs:
   build:
     name: Build APK
@@ -14,8 +14,8 @@ jobs:
           flutter-version: '1.7.8+hotfix.4'
       - run: flutter pub get
       - run: flutter test
-      - run: flutter build apk --debug
-      - name: Create a Release APK
+      - run: flutter build apk --debug --split-per-abi
+      - name: Push APK to Releases
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/debug/*.apk"
