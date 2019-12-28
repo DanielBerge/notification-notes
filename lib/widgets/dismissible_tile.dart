@@ -77,7 +77,7 @@ class DismissibleTile extends StatelessWidget {
     myItems.removeItem(item);
     Scaffold.of(context).removeCurrentSnackBar();
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text("Removed ${item.toString()}"),
+      content: Text("Removed ${item.toString().split("§")[0]}"),
       action: SnackBarAction(
         label: "Undo",
         onPressed: () {
