@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:notification_notes/handlers/StorageHandler.dart';
+import 'package:notification_notes/handlers/storage_handler.dart';
 
 class ItemList with ChangeNotifier {
   StorageHandler _storageHandler = new StorageHandler();

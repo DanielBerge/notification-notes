@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:notification_notes/item_list.dart';
+import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
-
-import '../ItemList.dart';
-import 'NotificationList.dart';
 
 class DismissibleTile extends StatelessWidget {
   final item;

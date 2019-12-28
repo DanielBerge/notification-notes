@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:notification_notes/ItemList.dart';
+import 'package:notification_notes/item_list.dart';
 
 class EditNotificationDialog extends StatelessWidget {
   final ItemList itemList;
