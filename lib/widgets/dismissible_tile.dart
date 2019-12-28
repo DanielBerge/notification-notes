@@ -48,7 +48,7 @@ class DismissibleTile extends StatelessWidget {
           IconSlideAction(
             caption: "Delete",
             color: Colors.red,
-            icon: Icons.remove,
+            icon: Icons.cancel,
             onTap: () {
               removeItem(context, myItems);
             },

@@ -14,8 +14,9 @@ class NotificationList extends StatelessWidget {
 
     return showDialog(
       context: context,
-      builder: (BuildContext context) =>
-          Dialog(child: EditNotificationDialog(itemList: myItems)),
+      builder: (BuildContext context) => Dialog(
+        child: EditNotificationDialog(itemList: myItems),
+      ),
     );
   }
 

@@ -12,39 +12,47 @@ class EditNotificationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = itemList.editing == null ? "" : itemList.editing.string;
-    return SizedBox(
+    titleController.text =
+        itemList.editing == null ? "" : itemList.editing.string;
+    return Container(
       width: 200,
-      height: 300,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: titleController,
-              decoration: InputDecoration(labelText: "Title"),
-            ),
-            TextFormField(
-              controller: descriptionController,
-              decoration: InputDecoration(labelText: "Description"),
-              minLines: 3,
-              maxLines: 5,
-            ),
-            MaterialButton(
-              child: Text("Save"),
-              color: Colors.teal,
-              onPressed: () {
-                if(itemList.editing == null) {
-                  itemList.addItem(titleController.text);
-                  Navigator.of(context).pop();
-                } else {
-                  itemList.insertItem(itemList.editing.index, titleController.text);
-                  itemList.clearEditingItem();
-                  Navigator.of(context).pop();
-                }
-              },
-            )
-          ],
+      height: 240,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white
+      ),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                controller: titleController,
+                decoration: InputDecoration(labelText: "Title"),
+              ),
+              TextFormField(
+                controller: descriptionController,
+                decoration: InputDecoration(labelText: "Description"),
+                minLines: 3,
+                maxLines: 5,
+              ),
+              MaterialButton(
+                child: Text("Save"),
+                color: Colors.teal,
+                onPressed: () {
+                  if (itemList.editing == null) {
+                    itemList.addItem(titleController.text);
+                    Navigator.of(context).pop();
+                  } else {
+                    itemList.insertItem(
+                        itemList.editing.index, titleController.text);
+                    itemList.clearEditingItem();
+                    Navigator.of(context).pop();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
