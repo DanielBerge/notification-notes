@@ -39,7 +39,7 @@ class EditNotificationDialog extends StatelessWidget {
                 controller: descriptionController,
                 decoration: InputDecoration(labelText: "Description"),
                 minLines: 3,
-                maxLines: 5,
+                maxLines: 1000,
               ),
               MaterialButton(
                 child: Text("Save"),
