@@ -12,15 +12,20 @@ class EditNotificationDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    titleController.text =
-        itemList.editing == null ? "" : itemList.editing.string;
+    if (itemList.editing == null) {
+      titleController.text = "";
+      descriptionController.text = "";
+    } else {
+      List<String> titleDescription =
+          itemList.editing.string.toString().split("§");
+      titleController.text = titleDescription[0];
+      descriptionController.text = titleDescription[1];
+    }
     return Container(
       width: 200,
       height: 240,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.white
-      ),
+          borderRadius: BorderRadius.circular(10), color: Colors.white),
       child: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -41,11 +46,16 @@ class EditNotificationDialog extends StatelessWidget {
                 color: Colors.teal,
                 onPressed: () {
                   if (itemList.editing == null) {
-                    itemList.addItem(titleController.text);
+                    itemList.addItem(titleController.text +
+                        "§" +
+                        descriptionController.text);
                     Navigator.of(context).pop();
                   } else {
                     itemList.insertItem(
-                        itemList.editing.index, titleController.text);
+                        itemList.editing.index,
+                        titleController.text +
+                            "§" +
+                            descriptionController.text);
                     itemList.clearEditingItem();
                     Navigator.of(context).pop();
                   }

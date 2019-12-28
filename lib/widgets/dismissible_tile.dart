@@ -13,6 +13,10 @@ class DismissibleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myItems = Provider.of<ItemList>(context, listen: false);
+    List<String> titleDescription = item.toString().split("§");
+    String title = titleDescription[0];
+    String description = titleDescription[1];
+
     return Padding(
       padding: const EdgeInsets.all(2.0),
       child: Slidable(
@@ -22,14 +26,14 @@ class DismissibleTile extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                  color: Colors.white,
+                color: Colors.white,
               ),
             ],
           ),
           child: ListTile(
             key: ValueKey(item),
-            title: Text(item),
-            subtitle: Text(item),
+            title: Text(title),
+            subtitle: Text(description),
           ),
         ),
         actions: <Widget>[
