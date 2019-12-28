@@ -45,8 +45,9 @@ class NotificationHandler {
     flutterLocalNotificationsPlugin.cancelAll();
     final myItems = Provider.of<ItemList>(context, listen: true);
     for (final item in myItems.myItems.reversed) {
+      List<String> titleDescription = item.split("§");
       showNotification(
-          myItems.myItems.indexOf(item), item.toString(), item.toUpperCase());
+          myItems.myItems.indexOf(item), titleDescription[0], titleDescription[1]);
     }
   }
 }
