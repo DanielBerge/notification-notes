@@ -13,44 +13,57 @@ class DismissibleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myItems = Provider.of<ItemList>(context, listen: false);
-    return Slidable(
-      key: ValueKey(item),
-      actionPane: SlidableDrawerActionPane(),
-      child: ListTile(
+    return Padding(
+      padding: const EdgeInsets.all(2.0),
+      child: Slidable(
         key: ValueKey(item),
-        title: Text(item),
-      ),
-      actions: <Widget>[
-        IconSlideAction(
-          caption: "Edit",
-          color: Colors.yellow,
-          icon: Icons.edit,
-          onTap: () {
-            myItems.setEditingItem(item);
-            NotificationList.showEditNotificationDialog(context);
-            myItems.removeItem(item);
+        actionPane: SlidableDrawerActionPane(),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.white,
+              ),
+            ],
+          ),
+          child: ListTile(
+            key: ValueKey(item),
+            title: Text(item),
+            subtitle: Text(item),
+          ),
+        ),
+        actions: <Widget>[
+          IconSlideAction(
+            caption: "Edit",
+            color: Colors.yellow,
+            icon: Icons.edit,
+            onTap: () {
+              myItems.setEditingItem(item);
+              NotificationList.showEditNotificationDialog(context);
+              myItems.removeItem(item);
+            },
+          )
+        ],
+        secondaryActions: <Widget>[
+          IconSlideAction(
+            caption: "Delete",
+            color: Colors.red,
+            icon: Icons.remove,
+            onTap: () {
+              removeItem(context, myItems);
+            },
+          ),
+        ],
+        dismissal: SlidableDismissal(
+          dismissThresholds: <SlideActionType, double>{
+            SlideActionType.primary: 1.0,
+            SlideActionType.secondary: 0.3
           },
-        )
-      ],
-      secondaryActions: <Widget>[
-        IconSlideAction(
-          caption: "Delete",
-          color: Colors.red,
-          icon: Icons.remove,
-          onTap: () {
+          child: SlidableDrawerDismissal(),
+          onDismissed: (actionType) {
             removeItem(context, myItems);
           },
         ),
-      ],
-      dismissal: SlidableDismissal(
-        dismissThresholds: <SlideActionType, double>{
-          SlideActionType.primary: 1.0,
-          SlideActionType.secondary: 0.3
-        },
-        child: SlidableDrawerDismissal(),
-        onDismissed: (actionType) {
-          removeItem(context, myItems);
-        },
       ),
     );
   }
