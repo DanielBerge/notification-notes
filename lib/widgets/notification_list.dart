@@ -10,7 +10,7 @@ class NotificationList extends StatelessWidget {
   final String title;
 
   static Future showEditNotificationDialog(BuildContext context) {
-    final myItems = Provider.of<ItemList>(context, listen: true);
+    final myItems = Provider.of<ItemList>(context, listen: false);
 
     return showDialog(
       context: context,
