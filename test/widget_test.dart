@@ -18,7 +18,25 @@ void main() {
     expect(find.text("Title"), findsOneWidget);
     expect(find.text("Description"), findsOneWidget);
     expect(find.text("Save"), findsOneWidget);
+  });
 
+  testWidgets("Create one note", (WidgetTester tester) async {
+    await tester.pumpWidget(MyApp());
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
+    expect(find.byType(TextFormField), findsNWidgets(2));
+    await tester.enterText(find.widgetWithText(TextFormField, "Title"), "aaa");
+    await tester.enterText(find.widgetWithText(TextFormField, "Description"), "bbb");
+
+    expect(find.text("aaa"), findsOneWidget);
+    expect(find.text("bbb"), findsOneWidget);
+
+    await tester.tap(find.byType(MaterialButton));
+    await tester.pump();
+    expect(find.byType(TextFormField), findsNothing);
+    expect(find.byType(MaterialButton), findsNothing);
+
+    expect(find.byType(ListTile), findsOneWidget);
   });
 }
