@@ -2,7 +2,7 @@ on:
   push: 
     tags:
       - v*
-name: Test, Build and Release apk
+name: Build and Release apk
 jobs:
   build:  
     name: Build APK
