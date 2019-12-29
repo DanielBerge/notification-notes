@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
 import 'package:notification_notes/main.dart';
 
 void main() {
@@ -10,7 +9,8 @@ void main() {
     expect(find.text('Notification notes'), findsNothing);
   });
 
-  testWidgets("Dialogbox shows when clicking add icon", (WidgetTester tester) async {
+  testWidgets("Dialogbox shows when clicking add icon",
+      (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
@@ -37,15 +37,13 @@ void main() {
   testWidgets("Create 10 notes", (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
 
-    for(var i = 0; i < 10; i++) await createNote(tester, "aaa$i", "bbb$i");
+    for (var i = 0; i < 10; i++) await createNote(tester, "aaa$i", "bbb$i");
 
     expect(find.byType(TextFormField), findsNothing);
     expect(find.byType(MaterialButton), findsNothing);
 
     expect(find.byType(ListTile), findsNWidgets(10));
   });
-
-
 }
 
 createNote(WidgetTester tester, String title, String description) async {
@@ -54,7 +52,8 @@ createNote(WidgetTester tester, String title, String description) async {
 
   expect(find.byType(TextFormField), findsNWidgets(2));
   await tester.enterText(find.widgetWithText(TextFormField, "Title"), title);
-  await tester.enterText(find.widgetWithText(TextFormField, "Description"), description);
+  await tester.enterText(
+      find.widgetWithText(TextFormField, "Description"), description);
 
   expect(find.text(title), findsOneWidget);
   expect(find.text(description), findsOneWidget);
