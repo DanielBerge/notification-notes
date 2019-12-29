@@ -11,20 +11,21 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:notification_notes/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('Check if title exists', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
+    expect(find.text('Notification Notes'), findsOneWidget);
+    expect(find.text('Notification notes'), findsNothing);
+  });
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
+  testWidgets("Dialogbox shows when clicking add icon", (WidgetTester tester) async {
+    await tester.pumpWidget(MyApp());
     await tester.tap(find.byIcon(Icons.add));
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text("Title"), findsOneWidget);
+    expect(find.text("Description"), findsOneWidget);
+    expect(find.text("Save"), findsOneWidget);
+
+
   });
 }
