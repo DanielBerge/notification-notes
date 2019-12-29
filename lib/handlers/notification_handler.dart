@@ -9,16 +9,16 @@ class NotificationHandler {
 
   NotificationHandler() {
     var initializationSettingsAndroid =
-        new AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = new IOSInitializationSettings();
-    var initializationSettings = new InitializationSettings(
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings();
+    var initializationSettings = InitializationSettings(
         initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = new FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
   Future showNotification(int id, String title, String description) async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
         'your channel id', 'your channel name', 'your channel description',
         playSound: false,
         autoCancel: false,
@@ -29,8 +29,8 @@ class NotificationHandler {
         importance: Importance.Default,
         priority: Priority.Low);
     var iOSPlatformChannelSpecifics =
-        new IOSNotificationDetails(presentSound: false);
-    var platformChannelSpecifics = new NotificationDetails(
+        IOSNotificationDetails(presentSound: false);
+    var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       id,
@@ -46,8 +46,8 @@ class NotificationHandler {
     final myItems = Provider.of<ItemList>(context, listen: true);
     for (final item in myItems.myItems.reversed) {
       List<String> titleDescription = item.split("§");
-      showNotification(
-          myItems.myItems.indexOf(item), titleDescription[0], titleDescription[1]);
+      showNotification(myItems.myItems.indexOf(item), titleDescription[0],
+          titleDescription[1]);
     }
   }
 }
