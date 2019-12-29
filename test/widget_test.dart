@@ -18,6 +18,9 @@ void main() {
     expect(find.text("Title"), findsOneWidget);
     expect(find.text("Description"), findsOneWidget);
     expect(find.text("Save"), findsOneWidget);
+    expect(find.widgetWithText(TextFormField, "Title"), findsOneWidget);
+    expect(find.widgetWithText(TextFormField, "Description"), findsOneWidget);
+    expect(find.byType(MaterialButton), findsOneWidget);
   });
 
   testWidgets("Create one note", (WidgetTester tester) async {
