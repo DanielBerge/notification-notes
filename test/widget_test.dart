@@ -25,21 +25,40 @@ void main() {
 
   testWidgets("Create one note", (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
 
-    expect(find.byType(TextFormField), findsNWidgets(2));
-    await tester.enterText(find.widgetWithText(TextFormField, "Title"), "aaa");
-    await tester.enterText(find.widgetWithText(TextFormField, "Description"), "bbb");
+    await createNote(tester, "aaa", "bbbb");
 
-    expect(find.text("aaa"), findsOneWidget);
-    expect(find.text("bbb"), findsOneWidget);
-
-    await tester.tap(find.byType(MaterialButton));
-    await tester.pump();
     expect(find.byType(TextFormField), findsNothing);
     expect(find.byType(MaterialButton), findsNothing);
 
     expect(find.byType(ListTile), findsOneWidget);
   });
+
+  testWidgets("Create 10 notes", (WidgetTester tester) async {
+    await tester.pumpWidget(MyApp());
+
+    for(var i = 0; i < 10; i++) await createNote(tester, "aaa$i", "bbb$i");
+
+    expect(find.byType(TextFormField), findsNothing);
+    expect(find.byType(MaterialButton), findsNothing);
+
+    expect(find.byType(ListTile), findsNWidgets(10));
+  });
+
+
+}
+
+createNote(WidgetTester tester, String title, String description) async {
+  await tester.tap(find.byIcon(Icons.add));
+  await tester.pump();
+
+  expect(find.byType(TextFormField), findsNWidgets(2));
+  await tester.enterText(find.widgetWithText(TextFormField, "Title"), title);
+  await tester.enterText(find.widgetWithText(TextFormField, "Description"), description);
+
+  expect(find.text(title), findsOneWidget);
+  expect(find.text(description), findsOneWidget);
+
+  await tester.tap(find.byType(MaterialButton));
+  await tester.pump();
 }
