@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider<ItemList>(
           create: (context) => ItemList(),
-          child: NotificationList(title: 'Notification Notes')),
+          child: NotificationList(title: 'Notification notes')),
     );
   }
 }
