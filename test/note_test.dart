@@ -5,8 +5,8 @@ import 'package:notification_notes/main.dart';
 void main() {
   testWidgets('Check if title exists', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    expect(find.text('Notification Notes'), findsOneWidget);
-    expect(find.text('Notification notes'), findsNothing);
+    expect(find.text('Notification notes'), findsOneWidget);
+    expect(find.text('Notification Notes'), findsNothing);
   });
 
   testWidgets("Dialogbox shows when clicking add icon",
