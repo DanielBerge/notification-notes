@@ -9,8 +9,8 @@ class ItemList with ChangeNotifier {
   ItemList() {
     _storageHandler.getList().then((list) {
       myItems = list;
+      notifyListeners();
     });
-    notifyListeners();
   }
 
   void updateList(int oldIndex, int newIndex) {
