@@ -30,7 +30,7 @@ class NotificationHandler {
         importance: Importance.Default,
         priority: Priority.Low);
     var iOSPlatformChannelSpecifics =
-        IOSNotificationDetails(presentSound: false);
+        IOSNotificationDetails(presentSound: false, presentBadge: true, presentAlert: true);
     var platformChannelSpecifics = NotificationDetails(
         androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
