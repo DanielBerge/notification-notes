@@ -4,8 +4,6 @@
 
 *Google Play and the Google Play logo are trademarks of Google LLC.*
 
-A simple notification notes app, made with flutter.
-
 ## Features
 
 Dismissible, editable and reordable list
