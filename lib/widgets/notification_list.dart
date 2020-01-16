@@ -9,11 +9,12 @@ class NotificationList extends StatelessWidget {
   NotificationList({Key key, this.title}) : super(key: key);
   final String title;
 
-  static Future showEditNotificationDialog(BuildContext context) {
+  static Future showEditNotificationDialog(BuildContext context, editing) {
     final myItems = Provider.of<ItemList>(context, listen: false);
 
     return showDialog(
       context: context,
+      barrierDismissible: !editing,
       builder: (BuildContext context) => Dialog(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10.0))
@@ -49,7 +50,7 @@ class NotificationList extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            showEditNotificationDialog(context);
+            showEditNotificationDialog(context, false);
           },
           tooltip: 'Add',
           child: Icon(Icons.add),
