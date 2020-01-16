@@ -6,6 +6,10 @@ A simple notification notes app, made with flutter.
 
 Dismissible, editable and reordable list
 
+### Planned features
+
+Schedule notifications
+
 ## Dependencies
 
 * [Provider](https://pub.flutter-io.cn/packages/provider)
