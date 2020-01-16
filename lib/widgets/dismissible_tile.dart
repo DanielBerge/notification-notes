@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/item_list.dart';
+import 'package:notification_notes/main.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
 
@@ -13,7 +14,7 @@ class DismissibleTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final myItems = Provider.of<ItemList>(context, listen: false);
-    List<String> titleDescription = item.toString().split("§");
+    List<String> titleDescription = item.toString().split(MyApp.splitter);
     String title = titleDescription[0];
     String description = titleDescription[1];
 
@@ -77,7 +78,7 @@ class DismissibleTile extends StatelessWidget {
     myItems.removeItem(item);
     Scaffold.of(context).removeCurrentSnackBar();
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text("Removed ${item.toString().split("§")[0]}"),
+      content: Text("Removed ${item.toString().split(MyApp.splitter)[0]}"),
       action: SnackBarAction(
         label: "Undo",
         onPressed: () {

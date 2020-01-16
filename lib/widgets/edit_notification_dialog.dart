@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/item_list.dart';
+import 'package:notification_notes/main.dart';
 
 class EditNotificationDialog extends StatelessWidget {
   final ItemList itemList;
@@ -17,7 +18,7 @@ class EditNotificationDialog extends StatelessWidget {
       descriptionController.text = "";
     } else {
       List<String> titleDescription =
-          itemList.editing.string.toString().split("§");
+          itemList.editing.string.toString().split(MyApp.splitter);
       titleController.text = titleDescription[0];
       descriptionController.text = titleDescription[1];
     }
@@ -47,14 +48,14 @@ class EditNotificationDialog extends StatelessWidget {
                 onPressed: () {
                   if (itemList.editing == null) {
                     itemList.addItem(titleController.text +
-                        "§" +
+                        MyApp.splitter +
                         descriptionController.text);
                     Navigator.of(context).pop();
                   } else {
                     itemList.insertItem(
                         itemList.editing.index,
                         titleController.text +
-                            "§" +
+                            MyApp.splitter +
                             descriptionController.text);
                     itemList.clearEditingItem();
                     Navigator.of(context).pop();

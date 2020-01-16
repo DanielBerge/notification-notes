@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  static const String splitter = "¦§}#";
 
   @override
   Widget build(BuildContext context) {

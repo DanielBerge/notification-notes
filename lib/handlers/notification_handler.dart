@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_notes/item_list.dart';
+import 'package:notification_notes/main.dart';
 import 'package:provider/provider.dart';
 
 class NotificationHandler {
@@ -45,7 +46,7 @@ class NotificationHandler {
     flutterLocalNotificationsPlugin.cancelAll();
     final myItems = Provider.of<ItemList>(context, listen: true);
     for (final item in myItems.myItems.reversed) {
-      List<String> titleDescription = item.split("§");
+      List<String> titleDescription = item.split(MyApp.splitter);
       showNotification(myItems.myItems.indexOf(item), titleDescription[0],
           titleDescription[1]);
     }
