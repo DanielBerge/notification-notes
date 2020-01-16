@@ -15,6 +15,9 @@ class NotificationList extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (BuildContext context) => Dialog(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0))
+        ),
         child: EditNotificationDialog(itemList: myItems),
       ),
     );
