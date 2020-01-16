@@ -9,6 +9,8 @@ class EditNotificationDialog extends StatelessWidget {
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
+  final _formKey = GlobalKey<FormState>();
+
   EditNotificationDialog({@required this.itemList});
 
   @override
@@ -25,39 +27,53 @@ class EditNotificationDialog extends StatelessWidget {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextFormField(
-              controller: titleController,
-              decoration: InputDecoration(labelText: "Title"),
-            ),
-            TextFormField(
-              controller: descriptionController,
-              decoration: InputDecoration(labelText: "Description"),
-              minLines: 3,
-              maxLines: 1000,
-            ),
-            MaterialButton(
-              child: Text("Save"),
-              color: Colors.teal,
-              onPressed: () {
-                if (itemList.editing == null) {
-                  itemList.addItem(titleController.text +
-                      MyApp.splitter +
-                      descriptionController.text);
-                  Navigator.of(context).pop();
-                } else {
-                  itemList.insertItem(
-                      itemList.editing.index,
-                      titleController.text +
-                          MyApp.splitter +
-                          descriptionController.text);
-                  itemList.clearEditingItem();
-                  Navigator.of(context).pop();
-                }
-              },
-            )
-          ],
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: <Widget>[
+              TextFormField(
+                textCapitalization: TextCapitalization.sentences,
+                controller: titleController,
+                decoration: InputDecoration(labelText: "Title"),
+                validator: (value) {
+                  if (value.isEmpty) {
+                    return 'Please enter title';
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                textCapitalization: TextCapitalization.sentences,
+                controller: descriptionController,
+                decoration: InputDecoration(labelText: "Description"),
+                minLines: 3,
+                maxLines: 1000,
+              ),
+              MaterialButton(
+                child: Text("Save"),
+                color: Colors.teal,
+                onPressed: () {
+                  if(!_formKey.currentState.validate()) {
+                    return null;
+                  }
+                  if (itemList.editing == null) {
+                    itemList.addItem(titleController.text +
+                        MyApp.splitter +
+                        descriptionController.text);
+                    Navigator.of(context).pop();
+                  } else {
+                    itemList.insertItem(
+                        itemList.editing.index,
+                        titleController.text +
+                            MyApp.splitter +
+                            descriptionController.text);
+                    itemList.clearEditingItem();
+                    Navigator.of(context).pop();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
