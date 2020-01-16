@@ -12,6 +12,3 @@ Dismissible, editable and reordable list
 * [Local Notifications](https://pub.flutter-io.cn/packages/flutter_local_notifications)
 * [Shared preferences](https://pub.flutter-io.cn/packages/shared_preferences)
 * [Slidable](https://pub.flutter-io.cn/packages/flutter_slidable)
-
-## Known issues
-* Clicking out of editing note, removes note
