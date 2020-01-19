@@ -10,7 +10,8 @@ Dismissible, editable and reordable list
 
 ### Planned features
 
-Schedule notifications
+* Schedule notifications
+* Darkmode
 
 ## Dependencies
 
