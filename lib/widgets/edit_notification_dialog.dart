@@ -24,55 +24,58 @@ class EditNotificationDialog extends StatelessWidget {
       titleController.text = titleDescription[0];
       descriptionController.text = titleDescription[1];
     }
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              TextFormField(
-                textCapitalization: TextCapitalization.sentences,
-                controller: titleController,
-                decoration: InputDecoration(labelText: "Title"),
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please enter title';
-                  }
-                  return null;
-                },
-              ),
-              TextFormField(
-                textCapitalization: TextCapitalization.sentences,
-                controller: descriptionController,
-                decoration: InputDecoration(labelText: "Description"),
-                minLines: 3,
-                maxLines: 1000,
-              ),
-              MaterialButton(
-                child: Text("Save"),
-                color: Colors.teal,
-                onPressed: () {
-                  if(!_formKey.currentState.validate()) {
+    return Container(
+      width: 400,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  textCapitalization: TextCapitalization.sentences,
+                  controller: titleController,
+                  decoration: InputDecoration(labelText: "Title"),
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter title';
+                    }
                     return null;
-                  }
-                  if (itemList.editing == null) {
-                    itemList.addItem(titleController.text +
-                        MyApp.splitter +
-                        descriptionController.text);
-                    Navigator.of(context).pop();
-                  } else {
-                    itemList.insertItem(
-                        itemList.editing.index,
-                        titleController.text +
-                            MyApp.splitter +
-                            descriptionController.text);
-                    itemList.clearEditingItem();
-                    Navigator.of(context).pop();
-                  }
-                },
-              )
-            ],
+                  },
+                ),
+                TextFormField(
+                  textCapitalization: TextCapitalization.sentences,
+                  controller: descriptionController,
+                  decoration: InputDecoration(labelText: "Description"),
+                  minLines: 3,
+                  maxLines: 1000,
+                ),
+                MaterialButton(
+                  child: Text("Save"),
+                  color: Colors.teal,
+                  onPressed: () {
+                    if(!_formKey.currentState.validate()) {
+                      return null;
+                    }
+                    if (itemList.editing == null) {
+                      itemList.addItem(titleController.text +
+                          MyApp.splitter +
+                          descriptionController.text);
+                      Navigator.of(context).pop();
+                    } else {
+                      itemList.insertItem(
+                          itemList.editing.index,
+                          titleController.text +
+                              MyApp.splitter +
+                              descriptionController.text);
+                      itemList.clearEditingItem();
+                      Navigator.of(context).pop();
+                    }
+                  },
+                )
+              ],
+            ),
           ),
         ),
       ),
