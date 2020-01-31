@@ -13,7 +13,6 @@ Dismissible, editable and reordable list
 ### Planned features
 
 * Schedule notifications
-* Darkmode
 
 ## Dependencies
 
