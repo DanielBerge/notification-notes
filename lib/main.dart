@@ -15,8 +15,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Notification Notes',
       theme: ThemeData(
+        brightness: Brightness.light,
         primarySwatch: Colors.teal,
-        dialogBackgroundColor: Colors.white,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.teal,
       ),
       home: ChangeNotifierProvider<ItemList>(
           create: (context) => ItemList(),
