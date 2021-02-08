@@ -4,7 +4,7 @@ import 'package:notification_notes/handlers/storage_handler.dart';
 class ItemList with ChangeNotifier {
   StorageHandler _storageHandler = new StorageHandler();
   List<String> myItems = List();
-  Tuple editing = null;
+  Tuple editing;
 
   ItemList() {
     _storageHandler.getList().then((list) {

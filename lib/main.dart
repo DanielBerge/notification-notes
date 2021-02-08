@@ -3,7 +3,6 @@ import 'package:notification_notes/item_list.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
 
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -23,8 +22,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       home: ChangeNotifierProvider<ItemList>(
-          create: (context) => ItemList(),
-          child: NotificationList(title: 'Notification notes')),
+        create: (context) => ItemList(),
+        child: NotificationList(title: 'Notification notes'),
+      ),
     );
   }
 }
