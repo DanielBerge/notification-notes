@@ -35,9 +35,9 @@ class NotificationList extends StatelessWidget {
       ),
       body: ReorderableListView(
         children: <Widget>[
-          for (final item in items.myItems)
+          for (final item in items.myItems.items)
             DismissibleTile(
-              key: ValueKey(item),
+              key: ValueKey(item.title),
               item: item,
             ),
         ],

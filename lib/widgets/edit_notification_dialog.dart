@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/item_list.dart';
-import 'package:notification_notes/main.dart';
+import 'package:notification_notes/models/item.dart';
 
 class EditNotificationDialog extends StatelessWidget {
   final ItemList itemList;
@@ -19,10 +19,8 @@ class EditNotificationDialog extends StatelessWidget {
       titleController.text = "";
       descriptionController.text = "";
     } else {
-      List<String> titleDescription =
-          itemList.editing.string.toString().split(MyApp.splitter);
-      titleController.text = titleDescription[0];
-      descriptionController.text = titleDescription[1];
+      titleController.text = itemList.editing.item.title;
+      descriptionController.text = itemList.editing.item.description;
     }
     return Container(
       width: 400,
@@ -59,21 +57,25 @@ class EditNotificationDialog extends StatelessWidget {
                       return null;
                     }
                     if (itemList.editing == null) {
-                      itemList.addItem(titleController.text +
-                          MyApp.splitter +
-                          descriptionController.text);
+                      itemList.addItem(
+                        Item(
+                          title: titleController.text,
+                          description: descriptionController.text,
+                        ),
+                      );
                       Navigator.of(context).pop();
                     } else {
                       itemList.insertItem(
-                          itemList.editing.index,
-                          titleController.text +
-                              MyApp.splitter +
-                              descriptionController.text);
+                        itemList.editing.index,
+                        Item(
+                            title: titleController.text,
+                            description: descriptionController.text),
+                      );
                       itemList.clearEditingItem();
                       Navigator.of(context).pop();
                     }
                   },
-                )
+                ),
               ],
             ),
           ),

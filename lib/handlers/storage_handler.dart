@@ -1,15 +1,18 @@
+import 'dart:convert';
+
+import 'package:notification_notes/models/item.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHandler {
-  setList(List<String> list) async {
+  setList(Items list) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList("data", list);
+    prefs.setString("data", json.encode(list.toJson()));
   }
 
-  Future<List<String>> getList() async {
+  Future<Items> getList() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var stringList = prefs.getStringList("data");
-    return stringList == null ? List() : stringList;
+    String stringList = prefs.getString("data");
+    return stringList == null ? Items(items: List()) : Items.fromJson(json.decode(stringList));
   }
 
   clear() async {

@@ -3,20 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/item_list.dart';
 import 'package:notification_notes/main.dart';
+import 'package:notification_notes/models/item.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
 
 class DismissibleTile extends StatelessWidget {
-  final item;
+  final Item item;
 
   DismissibleTile({Key key, @required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final myItems = Provider.of<ItemList>(context, listen: false);
-    List<String> titleDescription = item.toString().split(MyApp.splitter);
-    String title = titleDescription[0];
-    String description = titleDescription[1];
+    final ItemList myItems = context.watch<ItemList>();
 
     return Padding(
       padding: const EdgeInsets.all(2.0),
@@ -33,8 +31,8 @@ class DismissibleTile extends StatelessWidget {
           ),
           child: ListTile(
             key: ValueKey(item),
-            title: Text(title),
-            subtitle: Text(description),
+            title: Text(item.title),
+            subtitle: Text(item.description),
           ),
         ),
         actions: <Widget>[
@@ -73,12 +71,12 @@ class DismissibleTile extends StatelessWidget {
     );
   }
 
-  void removeItem(context, myItems) {
-    int undoIndex = myItems.myItems.indexOf(item);
+  void removeItem(context, ItemList myItems) {
+    int undoIndex = myItems.myItems.items.indexOf(item);
     myItems.removeItem(item);
     Scaffold.of(context).removeCurrentSnackBar();
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text("Removed ${item.toString().split(MyApp.splitter)[0]}"),
+      content: Text("Removed ${item.title}"),
       action: SnackBarAction(
         label: "Undo",
         onPressed: () {

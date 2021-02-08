@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:notification_notes/handlers/storage_handler.dart';
 
+import 'models/item.dart';
+
 class ItemList with ChangeNotifier {
-  StorageHandler _storageHandler = new StorageHandler();
-  List<String> myItems = List();
+  StorageHandler _storageHandler = StorageHandler();
+  Items myItems = Items(items: List());
   Tuple editing;
 
   ItemList() {
@@ -14,41 +16,41 @@ class ItemList with ChangeNotifier {
   }
 
   void updateList(int oldIndex, int newIndex) {
-    var old = myItems[oldIndex];
-    myItems.removeAt(oldIndex);
-    if (newIndex == myItems.length + 1) {
-      myItems.add(old);
+    var old = myItems.items[oldIndex];
+    myItems.items.removeAt(oldIndex);
+    if (newIndex == myItems.items.length + 1) {
+      myItems.items.add(old);
     } else {
-      myItems.insert(newIndex, old);
+      myItems.items.insert(newIndex, old);
     }
     _storageHandler.setList(myItems);
     notifyListeners();
   }
 
-  void insertItem(index, item) {
-    if (index == myItems.length + 1) {
-      myItems.add(item);
+  void insertItem(int index, Item item) {
+    if (index == myItems.items.length + 1) {
+      myItems.items.add(item);
     } else {
-      myItems.insert(index, item);
+      myItems.items.insert(index, item);
     }
     _storageHandler.setList(myItems);
     notifyListeners();
   }
 
-  void removeItem(item) {
-    myItems.remove(item);
+  void removeItem(Item item) {
+    myItems.items.remove(item);
     _storageHandler.setList(myItems);
     notifyListeners();
   }
 
-  void addItem(item) {
-    myItems.add(item);
+  void addItem(Item item) {
+    myItems.items.add(item);
     _storageHandler.setList(myItems);
     notifyListeners();
   }
 
-  void setEditingItem(item) {
-    editing = Tuple(index: myItems.indexOf(item), string: item);
+  void setEditingItem(Item item) {
+    editing = Tuple(index: myItems.items.indexOf(item), item: item);
     notifyListeners();
   }
 
@@ -58,8 +60,8 @@ class ItemList with ChangeNotifier {
 }
 
 class Tuple {
-  var string;
-  var index;
+  Item item;
+  int index;
 
-  Tuple({this.index, this.string});
+  Tuple({this.index, this.item});
 }
