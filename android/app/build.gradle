@@ -58,6 +58,9 @@ android {
             storeFile file(keystoreProperties['storeFile'])
             storePassword keystoreProperties['storePassword']
         }
+        debug {
+
+        }
     }
     buildTypes {
         release {
