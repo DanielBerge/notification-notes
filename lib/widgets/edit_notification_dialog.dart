@@ -55,7 +55,7 @@ class EditNotificationDialog extends StatelessWidget {
                   child: Text("Save"),
                   color: Colors.teal,
                   onPressed: () {
-                    if(!_formKey.currentState.validate()) {
+                    if (!_formKey.currentState.validate()) {
                       return null;
                     }
                     if (itemList.editing == null) {

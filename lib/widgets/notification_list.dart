@@ -17,8 +17,7 @@ class NotificationList extends StatelessWidget {
       barrierDismissible: !editing,
       builder: (BuildContext context) => Dialog(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))
-        ),
+            borderRadius: BorderRadius.all(Radius.circular(10.0))),
         child: EditNotificationDialog(itemList: myItems),
       ),
     );
@@ -26,35 +25,32 @@ class NotificationList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final myItems = Provider.of<ItemList>(context, listen: false);
+    final ItemList items = context.watch<ItemList>();
 
-    NotificationHandler handler = new NotificationHandler();
-    handler.showNotifications(context);
+    NotificationHandler()..showNotifications(context);
 
-    return Consumer<ItemList>(
-      builder: (_, items, __) => Scaffold(
-        appBar: AppBar(
-          title: Text(title),
-        ),
-        body: ReorderableListView(
-          children: <Widget>[
-            for (final item in items.myItems)
-              DismissibleTile(
-                key: ValueKey(item),
-                item: item,
-              ),
-          ],
-          onReorder: (oldIndex, newIndex) {
-            myItems.updateList(oldIndex, newIndex);
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showEditNotificationDialog(context, false);
-          },
-          tooltip: 'Add',
-          child: Icon(Icons.add),
-        ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: ReorderableListView(
+        children: <Widget>[
+          for (final item in items.myItems)
+            DismissibleTile(
+              key: ValueKey(item),
+              item: item,
+            ),
+        ],
+        onReorder: (oldIndex, newIndex) {
+          items.updateList(oldIndex, newIndex);
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          showEditNotificationDialog(context, false);
+        },
+        tooltip: 'Add',
+        child: Icon(Icons.add),
       ),
     );
   }
