@@ -16,7 +16,7 @@ class ItemList with ChangeNotifier {
   }
 
   void updateList(int oldIndex, int newIndex) {
-    var old = myItems.items[oldIndex];
+    Item old = myItems.items[oldIndex];
     myItems.items.removeAt(oldIndex);
     if (newIndex == myItems.items.length + 1) {
       myItems.items.add(old);
@@ -56,6 +56,11 @@ class ItemList with ChangeNotifier {
 
   void clearEditingItem() {
     editing = null;
+  }
+
+  void toggleEnabled(Item item) {
+    myItems.items[myItems.items.indexOf(item)].enabled = !item.enabled;
+    notifyListeners();
   }
 }
 

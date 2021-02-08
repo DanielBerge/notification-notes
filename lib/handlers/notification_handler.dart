@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_notes/item_list.dart';
 import 'package:provider/provider.dart';
@@ -41,15 +42,17 @@ class NotificationHandler {
     );
   }
 
-  void showNotifications(context) {
+  void showNotifications(BuildContext context) {
     flutterLocalNotificationsPlugin.cancelAll();
-    final myItems = Provider.of<ItemList>(context, listen: true);
+    final myItems = context.read<ItemList>();
     for (final item in myItems.myItems.items.reversed) {
-      showNotification(
-        myItems.myItems.items.indexOf(item),
-        item.title,
-        item.description,
-      );
+      if (item.enabled) {
+        showNotification(
+          myItems.myItems.items.indexOf(item),
+          item.title,
+          item.description,
+        );
+      }
     }
   }
 }

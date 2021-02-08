@@ -61,6 +61,7 @@ class EditNotificationDialog extends StatelessWidget {
                         Item(
                           title: titleController.text,
                           description: descriptionController.text,
+                          enabled: true,
                         ),
                       );
                       Navigator.of(context).pop();
@@ -68,8 +69,10 @@ class EditNotificationDialog extends StatelessWidget {
                       itemList.insertItem(
                         itemList.editing.index,
                         Item(
-                            title: titleController.text,
-                            description: descriptionController.text),
+                          title: titleController.text,
+                          description: descriptionController.text,
+                          enabled: itemList.editing.item.enabled,
+                        ),
                       );
                       itemList.clearEditingItem();
                       Navigator.of(context).pop();

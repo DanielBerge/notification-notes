@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/item_list.dart';
-import 'package:notification_notes/main.dart';
 import 'package:notification_notes/models/item.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
@@ -32,18 +31,22 @@ class DismissibleTile extends StatelessWidget {
           child: ListTile(
             key: ValueKey(item),
             title: Text(item.title),
+            enabled: item.enabled,
             subtitle: Text(item.description),
-          ),
-        ),
-        actions: <Widget>[
-          IconSlideAction(
-            caption: "Edit",
-            color: Colors.yellow,
-            icon: Icons.edit,
             onTap: () {
               myItems.setEditingItem(item);
               NotificationList.showEditNotificationDialog(context, true);
               myItems.removeItem(item);
+            },
+          ),
+        ),
+        actions: <Widget>[
+          IconSlideAction(
+            caption: item.enabled ? "Disable" : "Enable",
+            color: item.enabled ? Colors.red : Colors.green,
+            icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
+            onTap: () {
+              myItems.toggleEnabled(item);
             },
           )
         ],
@@ -75,15 +78,17 @@ class DismissibleTile extends StatelessWidget {
     int undoIndex = myItems.myItems.items.indexOf(item);
     myItems.removeItem(item);
     Scaffold.of(context).removeCurrentSnackBar();
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text("Removed ${item.title}"),
-      action: SnackBarAction(
-        label: "Undo",
-        onPressed: () {
-          myItems.insertItem(undoIndex, item);
-        },
+    Scaffold.of(context).showSnackBar(
+      SnackBar(
+        content: Text("Removed ${item.title}"),
+        action: SnackBarAction(
+          label: "Undo",
+          onPressed: () {
+            myItems.insertItem(undoIndex, item);
+          },
+        ),
+        duration: Duration(seconds: 3),
       ),
-      duration: Duration(seconds: 3),
-    ));
+    );
   }
 }
