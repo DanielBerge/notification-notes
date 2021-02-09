@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:notification_notes/item_list.dart';
+import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
 
@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primarySwatch: Colors.teal,
       ),
-      home: ChangeNotifierProvider<ItemList>(
-        create: (context) => ItemList(),
+      home: ChangeNotifierProvider<NoteListHandler>(
+        create: (context) => NoteListHandler(),
         child: NotificationList(title: 'Notification notes'),
       ),
     );

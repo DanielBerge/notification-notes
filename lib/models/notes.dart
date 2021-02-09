@@ -1,40 +1,40 @@
 import 'package:flutter/cupertino.dart';
 
-class Items {
-  List<Item> items;
+class Notes {
+  List<Note> notes;
 
-  Items({this.items});
+  Notes({@required this.notes});
 
-  Items.fromJson(Map<String, dynamic> json) {
-    if (json['items'] != null) {
-      items = List<Item>();
-      json['items'].forEach((v) {
-        items.add(Item.fromJson(v));
+  Notes.fromJson(Map<String, dynamic> json) {
+    if (json['notes'] != null) {
+      notes = List<Note>();
+      (json['notes'] as List).forEach((v) {
+        notes.add(Note.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    if (this.items != null) {
-      data['items'] = this.items.map((v) => v.toJson()).toList();
+    if (this.notes != null) {
+      data['notes'] = this.notes.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Item {
+class Note {
   String title;
   String description;
   bool enabled;
 
-  Item({
+  Note({
     @required this.title,
     @required this.description,
     @required this.enabled,
   });
 
-  Item.fromJson(Map<String, dynamic> json) {
+  Note.fromJson(Map<String, dynamic> json) {
     title = json['title'];
     description = json['description'];
     enabled = json['enabled'];

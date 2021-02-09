@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:notification_notes/item_list.dart';
-import 'package:notification_notes/models/item.dart';
+import 'package:notification_notes/handlers/note_list_handler.dart';
+import 'package:notification_notes/models/notes.dart';
 
 class EditNotificationDialog extends StatelessWidget {
-  final ItemList itemList;
+  final NoteListHandler itemList;
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -58,7 +58,7 @@ class EditNotificationDialog extends StatelessWidget {
                     }
                     if (itemList.editing == null) {
                       itemList.addItem(
-                        Item(
+                        Note(
                           title: titleController.text,
                           description: descriptionController.text,
                           enabled: true,
@@ -68,7 +68,7 @@ class EditNotificationDialog extends StatelessWidget {
                     } else {
                       itemList.insertItem(
                         itemList.editing.index,
-                        Item(
+                        Note(
                           title: titleController.text,
                           description: descriptionController.text,
                           enabled: itemList.editing.item.enabled,

@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:notification_notes/item_list.dart';
-import 'package:notification_notes/models/item.dart';
+import 'package:notification_notes/handlers/note_list_handler.dart';
+import 'package:notification_notes/models/notes.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 import 'package:provider/provider.dart';
 
 class DismissibleTile extends StatelessWidget {
-  final Item item;
+  final Note item;
 
   DismissibleTile({Key key, @required this.item}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ItemList myItems = context.watch<ItemList>();
+    final NoteListHandler myItems = context.watch<NoteListHandler>();
 
     return Padding(
       padding: const EdgeInsets.all(2.0),
@@ -74,8 +74,8 @@ class DismissibleTile extends StatelessWidget {
     );
   }
 
-  void removeItem(context, ItemList myItems) {
-    int undoIndex = myItems.myItems.items.indexOf(item);
+  void removeItem(context, NoteListHandler myItems) {
+    int undoIndex = myItems.noteList.indexOf(item);
     myItems.removeItem(item);
     Scaffold.of(context).removeCurrentSnackBar();
     Scaffold.of(context).showSnackBar(
