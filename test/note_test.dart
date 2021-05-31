@@ -5,8 +5,7 @@ import 'package:notification_notes/main.dart';
 void main() {
   testWidgets('Check if title exists', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    expect(find.text('Notification notes'), findsOneWidget);
-    expect(find.text('Notification Notes'), findsNothing);
+    expect(find.text('MY NOTES'), findsOneWidget);
   });
 
   testWidgets("Dialogbox shows when clicking add icon",
@@ -20,7 +19,7 @@ void main() {
     expect(find.text("Save"), findsOneWidget);
     expect(find.widgetWithText(TextFormField, "Title"), findsOneWidget);
     expect(find.widgetWithText(TextFormField, "Description"), findsOneWidget);
-    expect(find.byType(MaterialButton), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsOneWidget);
   });
 
   testWidgets("Create one note", (WidgetTester tester) async {
@@ -58,6 +57,6 @@ createNote(WidgetTester tester, String title, String description) async {
   expect(find.text(title), findsOneWidget);
   expect(find.text(description), findsOneWidget);
 
-  await tester.tap(find.byType(MaterialButton));
+  await tester.tap(find.byType(ElevatedButton));
   await tester.pump();
 }
