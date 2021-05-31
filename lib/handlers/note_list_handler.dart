@@ -29,6 +29,7 @@ class NoteListHandler with ChangeNotifier {
     } else {
       noteList.insert(newIndex, old);
     }
+    _notes.notes.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
@@ -39,6 +40,7 @@ class NoteListHandler with ChangeNotifier {
     } else {
       noteList.insert(index, item);
     }
+    _notes.notes.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
@@ -56,6 +58,7 @@ class NoteListHandler with ChangeNotifier {
 
   void addItem(Note item) {
     _notes.notes.add(item);
+    _notes.notes.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
@@ -71,7 +74,18 @@ class NoteListHandler with ChangeNotifier {
 
   void toggleEnabled(Note item) {
     noteList[noteList.indexOf(item)].enabled = !item.enabled;
+    _notes.notes.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
+  }
+
+  int compareList(Note a, Note b) {
+    if (a.enabled && !b.enabled) {
+      return -1;
+    } else if (!a.enabled && b.enabled) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 }
