@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
@@ -11,17 +13,12 @@ class EditNotificationDialog extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  EditNotificationDialog({@required this.itemList});
+  EditNotificationDialog({required this.itemList});
 
   @override
   Widget build(BuildContext context) {
-    if (itemList.editing == null) {
-      titleController.text = "";
-      descriptionController.text = "";
-    } else {
-      titleController.text = itemList.editing.item.title;
-      descriptionController.text = itemList.editing.item.description;
-    }
+    titleController.text = itemList.editing?.item.title ?? "";
+    descriptionController.text = itemList.editing?.item.description ?? "";
     return Container(
       width: 400,
       child: SingleChildScrollView(
@@ -35,8 +32,8 @@ class EditNotificationDialog extends StatelessWidget {
                   textCapitalization: TextCapitalization.sentences,
                   controller: titleController,
                   decoration: InputDecoration(labelText: "Title"),
-                  validator: (value) {
-                    if (value.isEmpty) {
+                  validator: (String? value) {
+                    if (value!.isEmpty) {
                       return 'Please enter title';
                     }
                     return null;
@@ -53,7 +50,7 @@ class EditNotificationDialog extends StatelessWidget {
                   child: Text("Save"),
                   color: Colors.teal,
                   onPressed: () {
-                    if (!_formKey.currentState.validate()) {
+                    if (!_formKey.currentState!.validate()) {
                       return null;
                     }
                     if (itemList.editing == null) {
@@ -67,11 +64,11 @@ class EditNotificationDialog extends StatelessWidget {
                       Navigator.of(context).pop();
                     } else {
                       itemList.insertItem(
-                        itemList.editing.index,
+                        itemList.editing!.index,
                         Note(
                           title: titleController.text,
                           description: descriptionController.text,
-                          enabled: itemList.editing.item.enabled,
+                          enabled: itemList.editing!.item.enabled,
                         ),
                       );
                       itemList.clearEditingItem();

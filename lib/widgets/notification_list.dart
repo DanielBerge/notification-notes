@@ -6,8 +6,9 @@ import 'package:notification_notes/widgets/edit_notification_dialog.dart';
 import 'package:provider/provider.dart';
 
 class NotificationList extends StatelessWidget {
-  NotificationList({Key key, this.title}) : super(key: key);
   final String title;
+
+  NotificationList({Key? key, required this.title}) : super(key: key);
 
   static showEditNotificationDialog(BuildContext context, editing) {
     final NoteListHandler myItems = context.read<NoteListHandler>();

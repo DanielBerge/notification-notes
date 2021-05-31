@@ -1,3 +1,5 @@
+
+
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
@@ -6,14 +8,16 @@ import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:provider/provider.dart';
 
 class NotificationHandler {
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   NotificationHandler() {
     var initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');
     var initializationSettingsIOS = IOSInitializationSettings();
     var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
+      android: initializationSettingsAndroid,
+      iOS: initializationSettingsIOS,
+    );
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
@@ -27,12 +31,17 @@ class NotificationHandler {
         ongoing: true,
         enableVibration: false,
         channelShowBadge: false,
-        importance: Importance.Default,
-        priority: Priority.Low);
+        importance: Importance.defaultImportance,
+        priority: Priority.low);
     var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-        presentSound: false, presentBadge: true, presentAlert: true);
+      presentSound: false,
+      presentBadge: true,
+      presentAlert: true,
+    );
     var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+      android: androidPlatformChannelSpecifics,
+      iOS: iOSPlatformChannelSpecifics,
+    );
     await flutterLocalNotificationsPlugin.show(
       id,
       title,

@@ -7,8 +7,8 @@ import '../models/notes.dart';
 
 class NoteListHandler with ChangeNotifier {
   StorageHandler _storageHandler = StorageHandler();
-  Notes _notes = Notes(notes: List());
-  Tuple editing;
+  Notes _notes = Notes(notes: List.empty(growable: true));
+  Tuple? editing;
 
   NoteListHandler() {
     _storageHandler.getList().then((Notes list) {
@@ -72,5 +72,5 @@ class Tuple {
   Note item;
   int index;
 
-  Tuple({this.index, this.item});
+  Tuple({required this.index, required this.item});
 }
