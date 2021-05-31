@@ -39,7 +39,7 @@ class DismissibleTile extends StatelessWidget {
           actions: <Widget>[
             IconSlideAction(
               caption: item.enabled ? "Disable" : "Enable",
-              color: item.enabled ? Colors.red : Colors.green,
+              color: item.enabled ? Colors.redAccent : Colors.green,
               icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
               onTap: () {
                 myItems.toggleEnabled(item);
@@ -74,8 +74,8 @@ class DismissibleTile extends StatelessWidget {
   void removeItem(context, NoteListHandler myItems) {
     int undoIndex = myItems.noteList.indexOf(item);
     myItems.removeItem(item);
-    Scaffold.of(context).removeCurrentSnackBar();
-    Scaffold.of(context).showSnackBar(
+    ScaffoldMessenger.of(context).removeCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text("Removed ${item.title}"),
         action: SnackBarAction(

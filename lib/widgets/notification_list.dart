@@ -9,7 +9,7 @@ class NotificationList extends StatelessWidget {
   NotificationList({Key key, this.title}) : super(key: key);
   final String title;
 
-  static Future showEditNotificationDialog(BuildContext context, editing) {
+  static showEditNotificationDialog(BuildContext context, editing) {
     final NoteListHandler myItems = context.read<NoteListHandler>();
 
     return showDialog(
@@ -35,10 +35,9 @@ class NotificationList extends StatelessWidget {
         centerTitle: true,
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
-          )
-        ),
+            borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(10),
+        )),
         textTheme: TextTheme(
           headline6: TextStyle(
             color: Colors.teal,
