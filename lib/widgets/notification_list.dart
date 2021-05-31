@@ -51,6 +51,9 @@ class NotificationList extends StatelessWidget {
         ),
       ),
       body: ReorderableListView(
+        proxyDecorator: (widget, int, animation) {
+          return widget;
+        },
         children: <Widget>[
           for (final item in items.noteList)
             DismissibleTile(

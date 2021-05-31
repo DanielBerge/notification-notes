@@ -19,11 +19,11 @@ class DismissibleTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
-      child: Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Slidable(
-          key: ValueKey(item),
-          actionPane: SlidableDrawerActionPane(),
+      child: Slidable(
+        key: ValueKey(item),
+        actionPane: SlidableDrawerActionPane(),
+        child: Padding(
+          padding: const EdgeInsets.all(2.0),
           child: ListTile(
             key: ValueKey(item),
             title: Text(item.title),
@@ -35,36 +35,36 @@ class DismissibleTile extends StatelessWidget {
               noteListHandler.removeItem(item);
             },
           ),
-          actions: <Widget>[
-            IconSlideAction(
-              caption: item.enabled ? "Disable" : "Enable",
-              color: item.enabled ? Colors.redAccent : Colors.green,
-              icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
-              onTap: () {
-                noteListHandler.toggleEnabled(item);
-              },
-            )
-          ],
-          secondaryActions: <Widget>[
-            IconSlideAction(
-              caption: "Delete",
-              color: Colors.red,
-              icon: Icons.cancel,
-              onTap: () {
-                removeItem(context, noteListHandler);
-              },
-            ),
-          ],
-          dismissal: SlidableDismissal(
-            dismissThresholds: <SlideActionType, double>{
-              SlideActionType.primary: 1.0,
-              SlideActionType.secondary: 0.3
+        ),
+        actions: <Widget>[
+          IconSlideAction(
+            caption: item.enabled ? "Disable" : "Enable",
+            color: item.enabled ? Colors.redAccent : Colors.green,
+            icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
+            onTap: () {
+              noteListHandler.toggleEnabled(item);
             },
-            child: SlidableDrawerDismissal(),
-            onDismissed: (actionType) {
+          )
+        ],
+        secondaryActions: <Widget>[
+          IconSlideAction(
+            caption: "Delete",
+            color: Colors.red,
+            icon: Icons.cancel,
+            onTap: () {
               removeItem(context, noteListHandler);
             },
           ),
+        ],
+        dismissal: SlidableDismissal(
+          dismissThresholds: <SlideActionType, double>{
+            SlideActionType.primary: 1.0,
+            SlideActionType.secondary: 0.3
+          },
+          child: SlidableDrawerDismissal(),
+          onDismissed: (actionType) {
+            removeItem(context, noteListHandler);
+          },
         ),
       ),
     );
