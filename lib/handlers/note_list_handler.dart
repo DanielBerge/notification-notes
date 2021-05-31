@@ -71,6 +71,7 @@ class NoteListHandler with ChangeNotifier {
 
   void toggleEnabled(Note item) {
     noteList[noteList.indexOf(item)].enabled = !item.enabled;
+    _storageHandler.setList(_notes);
     notifyListeners();
   }
 }
