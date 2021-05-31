@@ -10,7 +10,7 @@ class NotificationList extends StatelessWidget {
 
   NotificationList({Key? key, required this.title}) : super(key: key);
 
-  static showEditNotificationDialog(BuildContext context, editing) {
+  static showEditNotificationDialog(BuildContext context) {
     final NoteListHandler noteListHandler = context.read<NoteListHandler>();
 
     return showDialog(
@@ -68,7 +68,7 @@ class NotificationList extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showEditNotificationDialog(context, false);
+          showEditNotificationDialog(context);
         },
         tooltip: 'Add',
         backgroundColor: Colors.teal,
