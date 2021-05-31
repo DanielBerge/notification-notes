@@ -64,6 +64,7 @@ class NotificationList extends StatelessWidget {
           showEditNotificationDialog(context, false);
         },
         tooltip: 'Add',
+        backgroundColor: Colors.teal,
         child: Icon(Icons.add),
       ),
     );
