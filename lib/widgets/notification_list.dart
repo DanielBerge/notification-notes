@@ -15,7 +15,6 @@ class NotificationList extends StatelessWidget {
 
     return showDialog(
       context: context,
-      barrierDismissible: !editing,
       builder: (BuildContext context) => Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(

@@ -43,6 +43,11 @@ class NoteListHandler with ChangeNotifier {
     notifyListeners();
   }
 
+  void replaceItem(int atIndex, Note oldItem, Note newItem) {
+    removeItem(oldItem);
+    insertItem(atIndex, newItem);
+  }
+
   void removeItem(Note item) {
     noteList.remove(item);
     _storageHandler.setList(_notes);

@@ -32,8 +32,9 @@ class EditNotificationDialog extends StatelessWidget {
           ),
         );
       } else {
-        noteListHandler.insertItem(
+        noteListHandler.replaceItem(
           noteListHandler.editing!.index,
+          noteListHandler.editing!.item,
           Note(
             title: titleController.text,
             description: descriptionController.text,

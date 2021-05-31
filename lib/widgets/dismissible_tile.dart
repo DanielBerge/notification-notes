@@ -30,7 +30,6 @@ class DismissibleTile extends StatelessWidget {
           onTap: () {
             noteListHandler.setEditingItem(item);
             NotificationList.showEditNotificationDialog(context, true);
-            noteListHandler.removeItem(item);
           },
         ),
         actions: <Widget>[
