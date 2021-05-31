@@ -11,7 +11,7 @@ class NotificationList extends StatelessWidget {
   NotificationList({Key? key, required this.title}) : super(key: key);
 
   static showEditNotificationDialog(BuildContext context, editing) {
-    final NoteListHandler myItems = context.read<NoteListHandler>();
+    final NoteListHandler noteListHandler = context.read<NoteListHandler>();
 
     return showDialog(
       context: context,
@@ -22,16 +22,16 @@ class NotificationList extends StatelessWidget {
             Radius.circular(10.0),
           ),
         ),
-        child: EditNotificationDialog(itemList: myItems),
+        child: EditNotificationDialog(noteListHandler: noteListHandler),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    final NoteListHandler items = context.watch<NoteListHandler>();
+    final NoteListHandler noteListHandler = context.watch<NoteListHandler>();
 
-    NotificationHandler()..showNotifications(context);
+    NotificationHandler()..showNotifications(noteListHandler.noteList);
 
     return Scaffold(
       appBar: AppBar(
@@ -56,15 +56,15 @@ class NotificationList extends StatelessWidget {
           return widget;
         },
         children: <Widget>[
-          for (final item in items.noteList)
+          for (final item in noteListHandler.noteList)
             DismissibleTile(
               key: ValueKey(item.hashCode),
               item: item,
-              noteListHandler: items,
+              noteListHandler: noteListHandler,
             ),
         ],
         onReorder: (oldIndex, newIndex) {
-          items.updateList(oldIndex, newIndex);
+          noteListHandler.updateList(oldIndex, newIndex);
         },
       ),
       floatingActionButton: FloatingActionButton(

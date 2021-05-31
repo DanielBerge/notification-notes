@@ -67,9 +67,9 @@ class DismissibleTile extends StatelessWidget {
     );
   }
 
-  void removeItem(context, NoteListHandler myItems) {
-    int undoIndex = myItems.noteList.indexOf(item);
-    myItems.removeItem(item);
+  void removeItem(context, NoteListHandler noteListHandler) {
+    int undoIndex = noteListHandler.noteList.indexOf(item);
+    noteListHandler.removeItem(item);
     ScaffoldMessenger.of(context).removeCurrentSnackBar();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -77,7 +77,7 @@ class DismissibleTile extends StatelessWidget {
         action: SnackBarAction(
           label: "Undo",
           onPressed: () {
-            myItems.insertItem(undoIndex, item);
+            noteListHandler.insertItem(undoIndex, item);
           },
         ),
         duration: Duration(seconds: 3),

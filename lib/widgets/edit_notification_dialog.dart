@@ -5,26 +5,26 @@ import 'package:notification_notes/models/note.dart';
 import 'package:notification_notes/utils/validators.dart';
 
 class EditNotificationDialog extends StatelessWidget {
-  final NoteListHandler itemList;
+  final NoteListHandler noteListHandler;
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
   final _formKey = GlobalKey<FormState>();
 
-  EditNotificationDialog({required this.itemList});
+  EditNotificationDialog({required this.noteListHandler});
 
   @override
   Widget build(BuildContext context) {
-    titleController.text = itemList.editing?.item.title ?? "";
-    descriptionController.text = itemList.editing?.item.description ?? "";
+    titleController.text = noteListHandler.editing?.item.title ?? "";
+    descriptionController.text = noteListHandler.editing?.item.description ?? "";
 
     onSave() {
       if (!_formKey.currentState!.validate()) {
         return null;
       }
-      if (itemList.editing == null) {
-        itemList.addItem(
+      if (noteListHandler.editing == null) {
+        noteListHandler.addItem(
           Note(
             title: titleController.text,
             description: descriptionController.text,
@@ -32,15 +32,15 @@ class EditNotificationDialog extends StatelessWidget {
           ),
         );
       } else {
-        itemList.insertItem(
-          itemList.editing!.index,
+        noteListHandler.insertItem(
+          noteListHandler.editing!.index,
           Note(
             title: titleController.text,
             description: descriptionController.text,
-            enabled: itemList.editing!.item.enabled,
+            enabled: noteListHandler.editing!.item.enabled,
           ),
         );
-        itemList.clearEditingItem();
+        noteListHandler.clearEditingItem();
       }
       Navigator.of(context).pop();
     }

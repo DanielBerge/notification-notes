@@ -1,10 +1,9 @@
-
-
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
+import 'package:notification_notes/models/note.dart';
 import 'package:provider/provider.dart';
 
 class NotificationHandler {
@@ -24,15 +23,18 @@ class NotificationHandler {
 
   Future showNotification(int id, String title, String description) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'your channel id', 'your channel name', 'your channel description',
-        playSound: false,
-        autoCancel: false,
-        onlyAlertOnce: true,
-        ongoing: true,
-        enableVibration: false,
-        channelShowBadge: false,
-        importance: Importance.defaultImportance,
-        priority: Priority.low);
+      'no.berge.notificationnotes',
+      'My Notes',
+      '',
+      playSound: false,
+      autoCancel: false,
+      onlyAlertOnce: true,
+      ongoing: true,
+      enableVibration: false,
+      channelShowBadge: false,
+      importance: Importance.defaultImportance,
+      priority: Priority.low,
+    );
     var iOSPlatformChannelSpecifics = IOSNotificationDetails(
       presentSound: false,
       presentBadge: true,
@@ -51,13 +53,12 @@ class NotificationHandler {
     );
   }
 
-  void showNotifications(BuildContext context) {
+  void showNotifications(List<Note> noteList) {
     flutterLocalNotificationsPlugin.cancelAll();
-    final NoteListHandler myItems = context.read<NoteListHandler>();
-    for (final item in myItems.noteList.reversed) {
+    for (final item in noteList.reversed) {
       if (item.enabled) {
         showNotification(
-          myItems.noteList.indexOf(item),
+          noteList.indexOf(item),
           item.title,
           item.description,
         );
