@@ -1,7 +1,7 @@
 name: notification_notes
 description: Notification notes app
 
-version: 1.0.3
+version: 2.0.0
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
