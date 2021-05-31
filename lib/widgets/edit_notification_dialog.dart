@@ -54,23 +54,40 @@ class EditNotificationDialog extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                TextFormField(
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: titleController,
-                  decoration: InputDecoration(labelText: "Title"),
-                  validator: titleValidator,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    textCapitalization: TextCapitalization.sentences,
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      labelText: "Title",
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: titleValidator,
+                  ),
                 ),
-                TextFormField(
-                  textCapitalization: TextCapitalization.sentences,
-                  controller: descriptionController,
-                  decoration: InputDecoration(labelText: "Description"),
-                  minLines: 3,
-                  maxLines: 1000,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    textCapitalization: TextCapitalization.sentences,
+                    controller: descriptionController,
+                    decoration: InputDecoration(
+                      labelText: "Description",
+                      border: OutlineInputBorder(),
+                    ),
+                    minLines: 3,
+                    maxLines: 1000,
+                  ),
                 ),
-                MaterialButton(
-                  child: Text("Save"),
-                  color: Colors.teal,
-                  onPressed: onSave,
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    child: Text("Save"),
+                    onPressed: onSave,
+                    style: ButtonStyle(
+                      minimumSize: MaterialStateProperty.all<Size>(Size.fromHeight(40)),
+                    ),
+                  ),
                 ),
               ],
             ),
