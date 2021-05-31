@@ -39,9 +39,10 @@ class NotificationList extends StatelessWidget {
         centerTitle: true,
         elevation: 2,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-          bottom: Radius.circular(10),
-        )),
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          ),
+        ),
         textTheme: TextTheme(
           headline6: TextStyle(
             color: Colors.teal,
@@ -51,6 +52,9 @@ class NotificationList extends StatelessWidget {
         ),
       ),
       body: ReorderableListView(
+        proxyDecorator: (widget, _, __) {
+          return widget;
+        },
         children: <Widget>[
           for (final item in items.noteList)
             DismissibleTile(

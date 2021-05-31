@@ -1,4 +1,4 @@
-import 'package:notification_notes/models/notes.dart';
+import 'note.dart';
 
 class NoteWrapper {
   Note item;

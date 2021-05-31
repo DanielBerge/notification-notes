@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
-import 'package:notification_notes/models/notes.dart';
+import 'package:notification_notes/models/note.dart';
 import 'package:notification_notes/utils/validators.dart';
 
 class EditNotificationDialog extends StatelessWidget {
@@ -85,7 +85,8 @@ class EditNotificationDialog extends StatelessWidget {
                     child: Text("Save"),
                     onPressed: onSave,
                     style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all<Size>(Size.fromHeight(40)),
+                      minimumSize:
+                          MaterialStateProperty.all<Size>(Size.fromHeight(40)),
                     ),
                   ),
                 ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/storage_handler.dart';
+import 'package:notification_notes/models/note.dart';
 import 'package:notification_notes/models/note_wrapper.dart';
 import 'package:notification_notes/models/notes.dart';
 
