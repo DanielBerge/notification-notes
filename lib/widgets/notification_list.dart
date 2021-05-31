@@ -32,6 +32,20 @@ class NotificationList extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
+        centerTitle: true,
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(10),
+          )
+        ),
+        textTheme: TextTheme(
+          headline6: TextStyle(
+            color: Colors.teal,
+            fontSize: 19,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: ReorderableListView(
         children: <Widget>[

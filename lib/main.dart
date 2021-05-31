@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       title: 'Notification Notes',
       theme: ThemeData(
         brightness: Brightness.light,
-        primarySwatch: Colors.teal,
+        primaryColor: Colors.white,
+        scaffoldBackgroundColor: Colors.white,
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
       ),
       home: ChangeNotifierProvider<NoteListHandler>(
         create: (context) => NoteListHandler(),
-        child: NotificationList(title: 'Notification notes'),
+        child: NotificationList(title: 'MY NOTES'),
       ),
     );
   }
