@@ -1,25 +1,22 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/models/notes.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
-import 'package:provider/provider.dart';
 
 class DismissibleTile extends StatelessWidget {
   final Note item;
+  final NoteListHandler noteListHandler;
 
   DismissibleTile({
     Key? key,
     required this.item,
+    required this.noteListHandler,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final NoteListHandler myItems = context.watch<NoteListHandler>();
-
     return Card(
       elevation: 2,
       child: Padding(
@@ -33,9 +30,9 @@ class DismissibleTile extends StatelessWidget {
             enabled: item.enabled,
             subtitle: Text(item.description),
             onTap: () {
-              myItems.setEditingItem(item);
+              noteListHandler.setEditingItem(item);
               NotificationList.showEditNotificationDialog(context, true);
-              myItems.removeItem(item);
+              noteListHandler.removeItem(item);
             },
           ),
           actions: <Widget>[
@@ -44,7 +41,7 @@ class DismissibleTile extends StatelessWidget {
               color: item.enabled ? Colors.redAccent : Colors.green,
               icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
               onTap: () {
-                myItems.toggleEnabled(item);
+                noteListHandler.toggleEnabled(item);
               },
             )
           ],
@@ -54,7 +51,7 @@ class DismissibleTile extends StatelessWidget {
               color: Colors.red,
               icon: Icons.cancel,
               onTap: () {
-                removeItem(context, myItems);
+                removeItem(context, noteListHandler);
               },
             ),
           ],
@@ -65,7 +62,7 @@ class DismissibleTile extends StatelessWidget {
             },
             child: SlidableDrawerDismissal(),
             onDismissed: (actionType) {
-              removeItem(context, myItems);
+              removeItem(context, noteListHandler);
             },
           ),
         ),

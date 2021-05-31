@@ -18,7 +18,10 @@ class NotificationList extends StatelessWidget {
       barrierDismissible: !editing,
       builder: (BuildContext context) => Dialog(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
+        ),
         child: EditNotificationDialog(itemList: myItems),
       ),
     );
@@ -53,6 +56,7 @@ class NotificationList extends StatelessWidget {
             DismissibleTile(
               key: ValueKey(item.hashCode),
               item: item,
+              noteListHandler: items,
             ),
         ],
         onReorder: (oldIndex, newIndex) {
