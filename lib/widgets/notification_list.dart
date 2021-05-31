@@ -23,7 +23,11 @@ class NotificationList extends StatelessWidget {
         ),
         child: EditNotificationDialog(noteListHandler: noteListHandler),
       ),
-    );
+    ).then((value) {
+      if (value == null) {
+        noteListHandler.clearEditingItem();
+      }
+    });
   }
 
   @override

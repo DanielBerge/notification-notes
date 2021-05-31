@@ -43,7 +43,7 @@ class EditNotificationDialog extends StatelessWidget {
         );
         noteListHandler.clearEditingItem();
       }
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(true);
     }
 
     return Container(
