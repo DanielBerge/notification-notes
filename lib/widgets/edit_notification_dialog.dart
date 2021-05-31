@@ -1,9 +1,8 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/models/notes.dart';
+import 'package:notification_notes/utils/validators.dart';
 
 class EditNotificationDialog extends StatelessWidget {
   final NoteListHandler itemList;
@@ -19,6 +18,33 @@ class EditNotificationDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     titleController.text = itemList.editing?.item.title ?? "";
     descriptionController.text = itemList.editing?.item.description ?? "";
+
+    onSave() {
+      if (!_formKey.currentState!.validate()) {
+        return null;
+      }
+      if (itemList.editing == null) {
+        itemList.addItem(
+          Note(
+            title: titleController.text,
+            description: descriptionController.text,
+            enabled: true,
+          ),
+        );
+      } else {
+        itemList.insertItem(
+          itemList.editing!.index,
+          Note(
+            title: titleController.text,
+            description: descriptionController.text,
+            enabled: itemList.editing!.item.enabled,
+          ),
+        );
+        itemList.clearEditingItem();
+      }
+      Navigator.of(context).pop();
+    }
+
     return Container(
       width: 400,
       child: SingleChildScrollView(
@@ -32,12 +58,7 @@ class EditNotificationDialog extends StatelessWidget {
                   textCapitalization: TextCapitalization.sentences,
                   controller: titleController,
                   decoration: InputDecoration(labelText: "Title"),
-                  validator: (String? value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter title';
-                    }
-                    return null;
-                  },
+                  validator: titleValidator,
                 ),
                 TextFormField(
                   textCapitalization: TextCapitalization.sentences,
@@ -49,32 +70,7 @@ class EditNotificationDialog extends StatelessWidget {
                 MaterialButton(
                   child: Text("Save"),
                   color: Colors.teal,
-                  onPressed: () {
-                    if (!_formKey.currentState!.validate()) {
-                      return null;
-                    }
-                    if (itemList.editing == null) {
-                      itemList.addItem(
-                        Note(
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          enabled: true,
-                        ),
-                      );
-                      Navigator.of(context).pop();
-                    } else {
-                      itemList.insertItem(
-                        itemList.editing!.index,
-                        Note(
-                          title: titleController.text,
-                          description: descriptionController.text,
-                          enabled: itemList.editing!.item.enabled,
-                        ),
-                      );
-                      itemList.clearEditingItem();
-                      Navigator.of(context).pop();
-                    }
-                  },
+                  onPressed: onSave,
                 ),
               ],
             ),

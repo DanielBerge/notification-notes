@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/storage_handler.dart';
+import 'package:notification_notes/models/note_wrapper.dart';
 import 'package:notification_notes/models/notes.dart';
 
 import '../models/notes.dart';
@@ -8,7 +9,7 @@ import '../models/notes.dart';
 class NoteListHandler with ChangeNotifier {
   StorageHandler _storageHandler = StorageHandler();
   Notes _notes = Notes(notes: List.empty(growable: true));
-  Tuple? editing;
+  NoteWrapper? editing;
 
   NoteListHandler() {
     _storageHandler.getList().then((Notes list) {
@@ -54,7 +55,7 @@ class NoteListHandler with ChangeNotifier {
   }
 
   void setEditingItem(Note item) {
-    editing = Tuple(index: noteList.indexOf(item), item: item);
+    editing = NoteWrapper(index: noteList.indexOf(item), item: item);
     notifyListeners();
   }
 
@@ -66,11 +67,4 @@ class NoteListHandler with ChangeNotifier {
     noteList[noteList.indexOf(item)].enabled = !item.enabled;
     notifyListeners();
   }
-}
-
-class Tuple {
-  Note item;
-  int index;
-
-  Tuple({required this.index, required this.item});
 }
