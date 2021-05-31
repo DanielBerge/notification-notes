@@ -59,6 +59,7 @@ class EditNotificationDialog extends StatelessWidget {
                   child: TextFormField(
                     textCapitalization: TextCapitalization.sentences,
                     controller: titleController,
+                    autofocus: true,
                     decoration: InputDecoration(
                       labelText: "Title",
                       border: OutlineInputBorder(),
