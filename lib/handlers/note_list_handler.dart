@@ -22,25 +22,29 @@ class NoteListHandler with ChangeNotifier {
   List<Note> get noteList => _notes.notes;
 
   void updateList(int oldIndex, int newIndex) {
-    Note old = _notes.notes[oldIndex];
+    Note old = noteList[oldIndex];
     noteList.removeAt(oldIndex);
-    if (newIndex == _notes.notes.length + 1) {
+    if (newIndex > noteList.length) {
       noteList.add(old);
     } else {
-      noteList.insert(newIndex, old);
+      if (newIndex < oldIndex) {
+        noteList.insert(newIndex, old);
+      } else {
+        noteList.insert(newIndex - 1, old);
+      }
     }
-    _notes.notes.sort(compareList);
+    noteList.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
 
   void insertItem(int index, Note item) {
-    if (index == noteList.length + 1) {
+    if (index > noteList.length) {
       noteList.add(item);
     } else {
       noteList.insert(index, item);
     }
-    _notes.notes.sort(compareList);
+    noteList.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
@@ -57,8 +61,8 @@ class NoteListHandler with ChangeNotifier {
   }
 
   void addItem(Note item) {
-    _notes.notes.add(item);
-    _notes.notes.sort(compareList);
+    noteList.add(item);
+    noteList.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
@@ -74,7 +78,7 @@ class NoteListHandler with ChangeNotifier {
 
   void toggleEnabled(Note item) {
     noteList[noteList.indexOf(item)].enabled = !item.enabled;
-    _notes.notes.sort(compareList);
+    noteList.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
   }
