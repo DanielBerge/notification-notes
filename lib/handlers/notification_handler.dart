@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/models/note.dart';
-import 'package:provider/provider.dart';
 
 class NotificationHandler {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -25,7 +22,6 @@ class NotificationHandler {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'no.berge.notificationnotes',
       'My Notes',
-      '',
       playSound: false,
       autoCancel: false,
       onlyAlertOnce: true,
