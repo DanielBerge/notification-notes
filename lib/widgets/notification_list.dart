@@ -46,12 +46,10 @@ class NotificationList extends StatelessWidget {
             bottom: Radius.circular(10),
           ),
         ),
-        textTheme: TextTheme(
-          headline6: TextStyle(
-            color: Colors.teal,
-            fontSize: 19,
-            fontWeight: FontWeight.bold,
-          ),
+        titleTextStyle: TextStyle(
+          color: Colors.teal,
+          fontSize: 19,
+          fontWeight: FontWeight.bold,
         ),
       ),
       body: ReorderableListView(
