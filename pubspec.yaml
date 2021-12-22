@@ -13,6 +13,7 @@ dependencies:
   shared_preferences: ^2.0.11
   flutter_local_notifications: ^9.1.5
   flutter_slidable: ^1.1.0
+  google_fonts: ^2.1.1
 
   cupertino_icons: ^1.0.4
 
