@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:notification_notes/main.dart';
+import 'package:notification_notes/widgets/dismissible_tile.dart';
 
 void main() {
   testWidgets('Check if title exists', (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
-    expect(find.text('MY NOTES'), findsOneWidget);
+    expect(find.text('Notifications'), findsOneWidget);
   });
 
   testWidgets("Dialogbox shows when clicking add icon",
@@ -33,15 +34,15 @@ void main() {
     expect(find.byType(ListTile), findsOneWidget);
   });
 
-  testWidgets("Create 10 notes", (WidgetTester tester) async {
+  testWidgets("Create 5 notes", (WidgetTester tester) async {
     await tester.pumpWidget(MyApp());
 
-    for (var i = 0; i < 10; i++) await createNote(tester, "aaa$i", "bbb$i");
+    for (var i = 0; i < 5; i++) await createNote(tester, "aaa$i", "bbb$i");
 
     expect(find.byType(TextFormField), findsNothing);
     expect(find.byType(MaterialButton), findsNothing);
 
-    expect(find.byType(ListTile), findsNWidgets(10));
+    expect(find.byType(DismissibleTile), findsNWidgets(5));
   });
 }
 
