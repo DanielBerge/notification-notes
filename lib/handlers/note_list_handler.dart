@@ -61,7 +61,7 @@ class NoteListHandler with ChangeNotifier {
   }
 
   void addItem(Note item) {
-    noteList.add(item);
+    noteList.insert(0, item);
     noteList.sort(compareList);
     _storageHandler.setList(_notes);
     notifyListeners();
