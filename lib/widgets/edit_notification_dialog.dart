@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/models/category.dart';
 import 'package:notification_notes/models/note.dart';
+import 'package:notification_notes/utils/statics.dart';
 import 'package:notification_notes/utils/validators.dart';
 
 class EditNotificationDialog extends StatelessWidget {
@@ -15,14 +16,14 @@ class EditNotificationDialog extends StatelessWidget {
 
   EditNotificationDialog({required this.noteListHandler});
 
-
   @override
   Widget build(BuildContext context) {
     titleController.text = noteListHandler.editing?.item.title ?? "";
     descriptionController.text =
         noteListHandler.editing?.item.description ?? "";
     print(noteListHandler.editing?.item.category);
-    this.noteCategory = noteListHandler.editing?.item.category ?? NoteCategory.unknown;
+    this.noteCategory =
+        noteListHandler.editing?.item.category ?? NoteCategory.unknown;
 
     onSave() {
       if (!_formKey.currentState!.validate()) {
@@ -57,13 +58,13 @@ class EditNotificationDialog extends StatelessWidget {
       width: 400,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(GENERAL_PADDING * 2),
           child: Form(
             key: _formKey,
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(GENERAL_PADDING),
                   child: TextFormField(
                     textCapitalization: TextCapitalization.sentences,
                     controller: titleController,
@@ -76,7 +77,7 @@ class EditNotificationDialog extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(GENERAL_PADDING),
                   child: TextFormField(
                     textCapitalization: TextCapitalization.sentences,
                     controller: descriptionController,
@@ -89,24 +90,25 @@ class EditNotificationDialog extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(GENERAL_PADDING),
                   child: DropdownButtonFormField<NoteCategory>(
                     value: noteCategory,
                     decoration: InputDecoration(
                       labelText: "Category",
                       border: OutlineInputBorder(),
                     ),
-                    items:
-                      NoteCategory.values.map((NoteCategory e) =>
-                          DropdownMenuItem(
+                    items: NoteCategory.values
+                        .map(
+                          (NoteCategory e) => DropdownMenuItem(
                             child: Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding:
+                                      const EdgeInsets.all(GENERAL_PADDING),
                                   child: Icon(
                                     e.icon,
                                     color: Colors.grey,
-                                    size: 26,
+                                    size: ICON_SIZE,
                                   ),
                                 ),
                                 Text(e.text),
@@ -114,14 +116,15 @@ class EditNotificationDialog extends StatelessWidget {
                             ),
                             value: e,
                           ),
-                      ).toList(),
+                        )
+                        .toList(),
                     onChanged: (NoteCategory? value) {
                       noteCategory = value ?? NoteCategory.unknown;
                     },
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(GENERAL_PADDING),
                   child: ElevatedButton(
                     child: Text("Save"),
                     onPressed: onSave,

@@ -1,0 +1,4 @@
+const BORDER_RADIUS = 10.0;
+const ELEVATION = 3.0;
+const GENERAL_PADDING = 8.0;
+const ICON_SIZE = 30.0;

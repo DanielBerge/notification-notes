@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/handlers/notification_handler.dart';
-import 'package:notification_notes/widgets/note_tile.dart';
+import 'package:notification_notes/utils/statics.dart';
 import 'package:notification_notes/widgets/edit_notification_dialog.dart';
+import 'package:notification_notes/widgets/note_tile.dart';
 import 'package:provider/provider.dart';
 
 class NotificationList extends StatelessWidget {
@@ -18,7 +19,7 @@ class NotificationList extends StatelessWidget {
       builder: (BuildContext context) => Dialog(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+            Radius.circular(BORDER_RADIUS),
           ),
         ),
         child: EditNotificationDialog(noteListHandler: noteListHandler),
@@ -40,10 +41,10 @@ class NotificationList extends StatelessWidget {
       appBar: AppBar(
         title: Text(title),
         centerTitle: true,
-        elevation: 2,
+        elevation: ELEVATION,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(10),
+            bottom: Radius.circular(BORDER_RADIUS),
           ),
         ),
       ),

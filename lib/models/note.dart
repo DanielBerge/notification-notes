@@ -18,7 +18,9 @@ class Note {
     description = json['description'];
     enabled = json['enabled'];
     category = NoteCategory.values.firstWhere(
-        (element) => element.toString().toLowerCase() == 'NoteCategory.${json['category']}'.toLowerCase(),
+        (element) =>
+            element.toString().toLowerCase() ==
+            'NoteCategory.${json['category']}'.toLowerCase(),
         orElse: () => NoteCategory.unknown);
     print(json['category']);
     print(category);

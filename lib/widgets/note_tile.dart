@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/models/category.dart';
 import 'package:notification_notes/models/note.dart';
+import 'package:notification_notes/utils/statics.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 
 class DismissibleTile extends StatelessWidget {
@@ -21,9 +22,9 @@ class DismissibleTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(BORDER_RADIUS),
         ),
-        elevation: 3,
+        elevation: ELEVATION,
         child: Slidable(
           key: ValueKey(item),
           startActionPane: ActionPane(
@@ -38,7 +39,7 @@ class DismissibleTile extends StatelessWidget {
               SlidableAction(
                 label: "Delete",
                 backgroundColor: Colors.red,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(BORDER_RADIUS),
                 icon: Icons.cancel,
                 onPressed: (BuildContext context) {
                   removeItem(context, noteListHandler);
@@ -51,7 +52,7 @@ class DismissibleTile extends StatelessWidget {
             children: [
               SlidableAction(
                 label: item.enabled ? "Disable" : "Enable",
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(BORDER_RADIUS),
                 backgroundColor: item.enabled ? Colors.redAccent : Colors.green,
                 icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
                 onPressed: (BuildContext context) {
@@ -65,10 +66,10 @@ class DismissibleTile extends StatelessWidget {
             title: Text(item.title),
             enabled: item.enabled,
             leading: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(GENERAL_PADDING),
               child: Icon(
                 item.category.icon,
-                size: 30,
+                size: ICON_SIZE,
               ),
             ),
             subtitle: Column(
