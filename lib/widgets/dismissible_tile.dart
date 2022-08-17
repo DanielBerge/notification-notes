@@ -17,51 +17,61 @@ class DismissibleTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
-      child: Slidable(
-        key: ValueKey(item),
-        startActionPane: ActionPane(
-          motion: BehindMotion(),
-          dismissible: DismissiblePane(
-            dismissThreshold: 0.3,
-            onDismissed: () {
-              removeItem(context, noteListHandler);
-            },
-          ),
-          children: [
-            SlidableAction(
-              label: "Delete",
-              backgroundColor: Colors.red,
-              icon: Icons.cancel,
-              onPressed: (BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        elevation: 3,
+        child: Slidable(
+          key: ValueKey(item),
+          startActionPane: ActionPane(
+            motion: BehindMotion(),
+            dismissible: DismissiblePane(
+              dismissThreshold: 0.3,
+              onDismissed: () {
                 removeItem(context, noteListHandler);
               },
             ),
-          ],
-        ),
-        endActionPane: ActionPane(
-          motion: BehindMotion(),
-          children: [
-            SlidableAction(
-              label: item.enabled ? "Disable" : "Enable",
-              backgroundColor: item.enabled ? Colors.redAccent : Colors.green,
-              icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
-              onPressed: (BuildContext context) {
-                noteListHandler.toggleEnabled(item);
-              },
-            )
-          ],
-        ),
-        child: ListTile(
-          key: ValueKey(item),
-          title: Text(item.title),
-          enabled: item.enabled,
-          subtitle: Text(item.description),
-          onTap: () {
-            noteListHandler.setEditingItem(item);
-            NotificationList.showEditNotificationDialog(context);
-          },
+            children: [
+              SlidableAction(
+                label: "Delete",
+                backgroundColor: Colors.red,
+                icon: Icons.cancel,
+                onPressed: (BuildContext context) {
+                  removeItem(context, noteListHandler);
+                },
+              ),
+            ],
+          ),
+          endActionPane: ActionPane(
+            motion: BehindMotion(),
+            children: [
+              SlidableAction(
+                label: item.enabled ? "Disable" : "Enable",
+                backgroundColor: item.enabled ? Colors.redAccent : Colors.green,
+                icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
+                onPressed: (BuildContext context) {
+                  noteListHandler.toggleEnabled(item);
+                },
+              )
+            ],
+          ),
+          child: ListTile(
+            key: ValueKey(item),
+            title: Text(item.title),
+            enabled: item.enabled,
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Divider(),
+                Text(item.description),
+              ],
+            ),
+            onTap: () {
+              noteListHandler.setEditingItem(item);
+              NotificationList.showEditNotificationDialog(context);
+            },
+          ),
         ),
       ),
     );
