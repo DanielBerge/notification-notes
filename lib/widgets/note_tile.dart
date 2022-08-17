@@ -38,6 +38,7 @@ class DismissibleTile extends StatelessWidget {
               SlidableAction(
                 label: "Delete",
                 backgroundColor: Colors.red,
+                borderRadius: BorderRadius.circular(10),
                 icon: Icons.cancel,
                 onPressed: (BuildContext context) {
                   removeItem(context, noteListHandler);
@@ -50,6 +51,7 @@ class DismissibleTile extends StatelessWidget {
             children: [
               SlidableAction(
                 label: item.enabled ? "Disable" : "Enable",
+                borderRadius: BorderRadius.circular(10),
                 backgroundColor: item.enabled ? Colors.redAccent : Colors.green,
                 icon: item.enabled ? Icons.clear : Icons.verified_user_outlined,
                 onPressed: (BuildContext context) {
