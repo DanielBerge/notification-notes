@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
+import 'package:notification_notes/models/category.dart';
 import 'package:notification_notes/models/note.dart';
 import 'package:notification_notes/widgets/notification_list.dart';
 
@@ -60,6 +60,7 @@ class DismissibleTile extends StatelessWidget {
             key: ValueKey(item),
             title: Text(item.title),
             enabled: item.enabled,
+            leading: Icon(item.category.icon),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

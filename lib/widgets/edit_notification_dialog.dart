@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
+import 'package:notification_notes/models/category.dart';
 import 'package:notification_notes/models/note.dart';
 import 'package:notification_notes/utils/validators.dart';
 
@@ -9,15 +9,20 @@ class EditNotificationDialog extends StatelessWidget {
 
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  NoteCategory noteCategory = NoteCategory.unknown;
 
   final _formKey = GlobalKey<FormState>();
 
   EditNotificationDialog({required this.noteListHandler});
 
+
   @override
   Widget build(BuildContext context) {
     titleController.text = noteListHandler.editing?.item.title ?? "";
-    descriptionController.text = noteListHandler.editing?.item.description ?? "";
+    descriptionController.text =
+        noteListHandler.editing?.item.description ?? "";
+    print(noteListHandler.editing?.item.category);
+    this.noteCategory = noteListHandler.editing?.item.category ?? NoteCategory.unknown;
 
     onSave() {
       if (!_formKey.currentState!.validate()) {
@@ -29,6 +34,7 @@ class EditNotificationDialog extends StatelessWidget {
             title: titleController.text,
             description: descriptionController.text,
             enabled: true,
+            category: noteCategory,
           ),
         );
       } else {
@@ -39,6 +45,7 @@ class EditNotificationDialog extends StatelessWidget {
             title: titleController.text,
             description: descriptionController.text,
             enabled: noteListHandler.editing!.item.enabled,
+            category: noteCategory,
           ),
         );
         noteListHandler.clearEditingItem();
@@ -79,6 +86,38 @@ class EditNotificationDialog extends StatelessWidget {
                     ),
                     minLines: 3,
                     maxLines: 1000,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: DropdownButtonFormField<NoteCategory>(
+                    value: noteCategory,
+                    decoration: InputDecoration(
+                      labelText: "Category",
+                      border: OutlineInputBorder(),
+                    ),
+                    items:
+                      NoteCategory.values.map((NoteCategory e) =>
+                          DropdownMenuItem(
+                            child: Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    e.icon,
+                                    color: Colors.grey,
+                                    size: 26,
+                                  ),
+                                ),
+                                Text(e.text),
+                              ],
+                            ),
+                            value: e,
+                          ),
+                      ).toList(),
+                    onChanged: (NoteCategory? value) {
+                      noteCategory = value ?? NoteCategory.unknown;
+                    },
                   ),
                 ),
                 Padding(
