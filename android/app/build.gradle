@@ -32,7 +32,8 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion flutter.compileSdkVersion
+    ndkVersion flutter.ndkVersion
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
@@ -73,6 +74,7 @@ android {
 
         }
         debug {
+            applicationIdSuffix ".dev"
             signingConfig signingConfigs.debug
         }
     }
