@@ -20,7 +20,9 @@ class DismissibleTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 10),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         elevation: 3,
         child: Slidable(
           key: ValueKey(item),
@@ -60,7 +62,13 @@ class DismissibleTile extends StatelessWidget {
             key: ValueKey(item),
             title: Text(item.title),
             enabled: item.enabled,
-            leading: Icon(item.category.icon),
+            leading: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                item.category.icon,
+                size: 30,
+              ),
+            ),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:notification_notes/models/note.dart';
+
+import '../models/category.dart';
 
 class NotificationHandler {
   late FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -18,7 +21,7 @@ class NotificationHandler {
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
   }
 
-  Future showNotification(int id, String title, String description) async {
+  Future showNotification(int id, String title, String description, NoteCategory category) async {
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'no.berge.notificationnotes',
       'My Notes',
@@ -30,6 +33,7 @@ class NotificationHandler {
       channelShowBadge: false,
       importance: Importance.defaultImportance,
       priority: Priority.low,
+      largeIcon: DrawableResourceAndroidBitmap("@mipmap/${category.text.toLowerCase()}"),
     );
     var iOSPlatformChannelSpecifics = IOSNotificationDetails(
       presentSound: false,
@@ -57,6 +61,7 @@ class NotificationHandler {
           noteList.indexOf(item),
           item.title,
           item.description,
+          item.category,
         );
       }
     }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notification_notes/handlers/note_list_handler.dart';
 import 'package:notification_notes/handlers/notification_handler.dart';
-import 'package:notification_notes/widgets/dismissible_tile.dart';
+import 'package:notification_notes/widgets/note_tile.dart';
 import 'package:notification_notes/widgets/edit_notification_dialog.dart';
 import 'package:provider/provider.dart';
 

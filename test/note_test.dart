@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:notification_notes/main.dart';
-import 'package:notification_notes/widgets/dismissible_tile.dart';
+import 'package:notification_notes/widgets/note_tile.dart';
 
 void main() {
   testWidgets('Check if title exists', (WidgetTester tester) async {
