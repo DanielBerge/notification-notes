@@ -69,10 +69,6 @@ class NotificationList extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showEditNotificationDialog(context);
-          StorageHandler _storageHandler = StorageHandler();
-          _storageHandler.getList().then((list) {
-            print("List " + list.toJson().toString());
-          });
         },
         tooltip: 'Add',
         backgroundColor: Colors.teal,
