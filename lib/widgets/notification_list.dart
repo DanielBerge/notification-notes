@@ -6,6 +6,8 @@ import 'package:notification_notes/widgets/edit_notification_dialog.dart';
 import 'package:notification_notes/widgets/note_tile.dart';
 import 'package:provider/provider.dart';
 
+import '../handlers/storage_handler.dart';
+
 class NotificationList extends StatelessWidget {
   final String title;
 
@@ -67,6 +69,10 @@ class NotificationList extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showEditNotificationDialog(context);
+          StorageHandler _storageHandler = StorageHandler();
+          _storageHandler.getList().then((list) {
+            print("List " + list.toJson().toString());
+          });
         },
         tooltip: 'Add',
         backgroundColor: Colors.teal,

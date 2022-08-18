@@ -18,12 +18,8 @@ class Note {
     description = json['description'];
     enabled = json['enabled'];
     category = NoteCategory.values.firstWhere(
-        (element) =>
-            element.toString().toLowerCase() ==
-            'NoteCategory.${json['category']}'.toLowerCase(),
+        (element) => element.toString() == json['category'],
         orElse: () => NoteCategory.unknown);
-    print(json['category']);
-    print(category);
   }
 
   Map<String, dynamic> toJson() {
@@ -32,7 +28,6 @@ class Note {
     data['description'] = this.description;
     data['enabled'] = this.enabled;
     data['category'] = this.category.toString();
-    print(data);
     return data;
   }
 }
